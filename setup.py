@@ -19,7 +19,7 @@ def get_requirements()-> List[str]:
 
 
 setup(
-    name= "predictive-wafer-maintenance",
+    name= "predictiveWaferMaintenance",
     version = "0.0.1",
     description="This is a predictive wafer maintenance package",
     author = "ayhanoruc",

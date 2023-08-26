@@ -2,9 +2,7 @@ venv
 env
 dist
 build
+wafer.egg-info/
 __pycache__
-*pycache 
-*egg-info
-
 *dataset
 results.txt

@@ -1,10 +1,10 @@
 README.md
 setup.py
-predictive_wafer_maintenance.egg-info/PKG-INFO
-predictive_wafer_maintenance.egg-info/SOURCES.txt
-predictive_wafer_maintenance.egg-info/dependency_links.txt
-predictive_wafer_maintenance.egg-info/requires.txt
-predictive_wafer_maintenance.egg-info/top_level.txt
+predictiveWaferMaintenance.egg-info/PKG-INFO
+predictiveWaferMaintenance.egg-info/SOURCES.txt
+predictiveWaferMaintenance.egg-info/dependency_links.txt
+predictiveWaferMaintenance.egg-info/requires.txt
+predictiveWaferMaintenance.egg-info/top_level.txt
 src/__init__.py
 src/components/__init__.py
 src/components/data_ingestion.py

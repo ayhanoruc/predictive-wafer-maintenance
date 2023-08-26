@@ -4,6 +4,7 @@ dist
 build
 __pycache__
 *pycache 
+*egg-info
 
 *dataset
 results.txt

@@ -5,5 +5,5 @@ build
 *pycache*
 *dataset
 results.txt
-*log*
+*logs*
 test.py

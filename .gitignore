@@ -1,8 +1,9 @@
-venv
-env
+*env*
 dist
 build
-.egg-info
-__pycache__
+*.egg*
+*pycache*
 *dataset
 results.txt
+*log*
+test.py

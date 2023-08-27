@@ -7,3 +7,4 @@ build
 results.txt
 *logs*
 test.py
+*ingested_data*

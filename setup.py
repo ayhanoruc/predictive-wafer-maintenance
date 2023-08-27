@@ -25,5 +25,5 @@ setup(
     author = "ayhanoruc",
     author_email=  "ayhan.orc.2554@gmail.com",
     packages=find_packages(),
-    install_requires = get_requirements()
+    #install_requires = get_requirements()
 )

@@ -4,7 +4,7 @@ import csv
 import pandas as pd 
 import os 
 
-# USE CLASSIC APPROACH with insert_many and pandas
+""" # USE CLASSIC APPROACH with insert_many and pandas
 def insert_data_classic():
     for file_path in csv_path_list:
 
@@ -15,9 +15,6 @@ def insert_data_classic():
         documents= df.to_dict(orient="records")
         collection.insert_many(documents)
 
-ingested_data_dir_name = "ingested_data_collection"
-ingested_data_dir = os.path.join(os.getcwd(),ingested_data_dir_name)
-os.makedirs(ingested_data_dir,exist_ok=True)
 
 
 def ingest_data_classic():
@@ -29,11 +26,16 @@ def ingest_data_classic():
         file_path = os.path.join(ingested_data_dir,file_name)
         df.to_csv(file_path,index=False)
         print("INGESTED: {}".format(file_name))
+ """
+
+
+def mongo_connect():
+    pass 
 
 
 
 # USE FS 
-def insert_with_fs():
+def insert_with_fs(csv_path_list):
     for file_path in csv_path_list:
 
         with open(file_path,'rb') as f:
@@ -42,14 +44,10 @@ def insert_with_fs():
             print("inserted file: {} with ID:{}".format(file_path,fs_id))
 
 
-dataset_dir = os.path.join(os.getcwd(),"dataset")
-csv_path_list = [os.path.join(dataset_dir,csv) for csv in os.listdir(dataset_dir)]
-
             
         
-def ingest_with_fs():
-    ingested_data_dir_name = "ingested_data_collection"
-    ingested_data_dir = os.path.join(os.getcwd(),ingested_data_dir_name)
+def ingest_with_fs(target_dir):
+    ingested_data_dir = os.path.join(os.getcwd(),target_dir,"testing")
     os.makedirs(ingested_data_dir,exist_ok=True)
     files= fs.find()
     
@@ -73,11 +71,13 @@ if __name__ == "__main__":
     database = client["local"]
     collection = database["wafer-fault-collection"]
     fs = GridFS(database)
-    dataset_dir = "./dataset"
-    csv_path_list = [f"./dataset/{csv}" for csv in os.listdir(dataset_dir)]
-    #insert_data_classic()
-    insert_with_fs()
-    #ingest_data_classic()
-    ingest_with_fs()
+
+    dataset_dir = os.path.join(os.getcwd(),"dataset","prediction-dataset")
+    csv_path_list = [os.path.join(dataset_dir,csv) for csv in os.listdir(dataset_dir)]
+
+    insert_with_fs(csv_path_list)
+
+    target_dir = "ingested_data_collection"
+    ingest_with_fs(target_dir)
 
     client.close()

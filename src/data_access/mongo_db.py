@@ -4,8 +4,7 @@ import os
 from src.exception_handler import CustomException
 from src.log_handler import AppLogger
 import logging
-from from_root import from_root
-
+from config import PROJECT_ROOT
 
 
 
@@ -47,7 +46,7 @@ class MongoConnect:
                 
             
     def ingest_with_fs(self,target_dir,collection_name):
-        ingested_data_dir = os.path.join(from_root(),"Desktop","predictive-wafer-maintenance",target_dir)
+        ingested_data_dir = os.path.join(PROJECT_ROOT,target_dir)
         os.makedirs(ingested_data_dir,exist_ok=True)
         print("ENTER INGESTION AREA")
         for file in self.gridfs.find({"metadata.collection_name": collection_name}):

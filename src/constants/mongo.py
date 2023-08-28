@@ -12,5 +12,3 @@ TESTING_COLLECTION_NAME = "wafer-fault-testing-collection"
 
 TRAINING_RAW_DATASET_DIR = os.path.join(PROJECT_ROOT,"dataset","training-dataset")
 TESTING_RAW_DATASET_DIR = os.path.join(PROJECT_ROOT,"dataset","prediction-dataset")
-INGESTED_TRAINING_RAW_DATASET_DIR = "ingested_data_collection2/training"
-INGESTED_TESTING_RAW_DATASET_DIR = "ingested_data_collection2/testing"

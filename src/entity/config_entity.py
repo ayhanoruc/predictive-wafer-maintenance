@@ -8,7 +8,7 @@ class TrainingPipelineConfig:
     def __init__(self,timestamp = datetime.now()):
         self.timestamp = timestamp.strftime("%d_%m_%Y_%H_%M")
         self.pipeline_name = training_pipeline.PIPELINE_NAME 
-        self.artifact_dir = os.path.join(training_pipeline.ARTIFACT_DIR_NAME,self.timestamp)
+        self.artifact_dir = os.path.join(PROJECT_ROOT,training_pipeline.ARTIFACT_DIR_NAME,self.timestamp)
 
 
 

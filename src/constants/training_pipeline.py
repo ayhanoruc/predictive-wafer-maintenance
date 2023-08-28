@@ -7,7 +7,7 @@ from config import PROJECT_ROOT
 PIPELINE_NAME = "training_pipeline"
 TARGET_COLUMN = "Good/Bad"
 ARTIFACT_DIR_NAME = "artifact" # directory for outputs from each stage
-SCHEMA_FILE_PATH = os.path.join(PROJECT_ROOT,"DSA","schema.json")
+SCHEMA_FILE_PATH = os.path.join(PROJECT_ROOT,"DSA","training_schema.json")
 SCHEMA_DROP_COLS = "drop_cols"
 TRAIN_FILE_NAME = "train.csv"
 TEST_FILE_NAME = "test.csv"

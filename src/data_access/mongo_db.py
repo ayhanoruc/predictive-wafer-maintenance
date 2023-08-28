@@ -5,6 +5,7 @@ from src.exception_handler import CustomException
 from src.log_handler import AppLogger
 import logging
 from config import PROJECT_ROOT
+import pandas as pd 
 
 
 
@@ -19,11 +20,11 @@ class MongoConnect:
 
         
 
-    def mongo_connection(self,MONGO_URL,DB_NAME):
+    def mongo_connection(self,mongo_url:str,db_name:str)->None:
         try:
 
-            self.client = MongoClient(MONGO_URL)        
-            self.database = self.client[DB_NAME]
+            self.client = MongoClient(mongo_url)        
+            self.database = self.client[db_name]
             self.gridfs = GridFS(self.database)
             self.log_writer.handle_logging("CONNECTION: SUCCESSFULL")
 
@@ -46,11 +47,10 @@ class MongoConnect:
                 
             
     def ingest_with_fs(self,target_dir,collection_name):
-        ingested_data_dir = os.path.join(PROJECT_ROOT,target_dir)
+        ingested_data_dir = os.path.join(target_dir)
         os.makedirs(ingested_data_dir,exist_ok=True)
         print("ENTER INGESTION AREA")
         for file in self.gridfs.find({"metadata.collection_name": collection_name}):
-            print("ENTER INGESTION AREA")
             file_data= file.read()
             file_name = os.path.basename(file.filename)
             file_path = os.path.join(ingested_data_dir,file_name)
@@ -59,6 +59,11 @@ class MongoConnect:
                 f.write(file_data)
                 print(f"Saved file {file_name} from {collection_name}")
 
+
+
+
+
+""" 
 
     def ingest_collection(self,COLLECTION_NAME):
 
@@ -73,7 +78,7 @@ class MongoConnect:
             raise exception       
 
 
-
+ """
 
 
 

@@ -1,10 +1,12 @@
 {
-    "SampleFileName": "wafer-fault-training-collection_Wafer_11012020_151432.csv",
+    
+    "SampleFileName": "Wafer_11012020_151432.csv",
     "LengthOfDateStampInFile": 8,
     "LengthOfTimeStampInFile": 6,
     "NumberofColumns": 592,
+    "MissingThreshold":0.5,
     "col_name": {
-        "Wafer": "varchar",
+        "Wafer": "str",
         "Sensor-1": "float",
         "Sensor-2": "float",
         "Sensor-3": "float",
@@ -595,6 +597,6 @@
         "Sensor-588": "float",
         "Sensor-589": "float",
         "Sensor-590": "float",
-        "Target": "Integer"
+        "Good/Bad": "int"
     }
 }

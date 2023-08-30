@@ -27,7 +27,7 @@ class MongoConnect:
             self.database = self.client[db_name]
             self.gridfs = GridFS(self.database)
             self.log_writer.handle_logging("CONNECTION: SUCCESSFULL")
-
+            
         except Exception as e:
             exception = CustomException(e,sys) 
             self.log_writer.handle_logging(exception,level=logging.ERROR)

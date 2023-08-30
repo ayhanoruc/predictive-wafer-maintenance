@@ -1,8 +1,8 @@
 
 import pandas as pd 
-
+import re
 import os
-
+import json 
 from src.exception_handler import CustomException
 from src.log_handler import AppLogger
 
@@ -28,3 +28,13 @@ def read_json_file(file_path:str)->dict:
     with open(file_path,"r") as json_file:
         return json.load(json_file)
 
+
+def create_regex():
+    #wafer-fault-training-collection_
+    filename_pattern = r"^wafer-raw-training-collection_Wafer_(?P<DateStamp>\d{8})_(?P<TimeStamp>\d{6})\.csv$"
+    re_object = re.compile(filename_pattern,re.IGNORECASE)
+    return re_object
+
+def check_regex_match(re_object,file_name):
+    match = re_object.match(file_name)
+    return bool(match)

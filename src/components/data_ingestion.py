@@ -11,7 +11,7 @@ from src.exception_handler import CustomException
 from src.log_handler import AppLogger 
 from src.entity.config_entity import DataIngestionConfig
 from src.entity.artifact_entity import DataIngestionArtifact 
-from src.constants.training_pipeline import SCHEMA_FILE_PATH
+from src.constants.training_pipeline import TRAINING_SCHEMA_FILE_PATH
 from src.data_access.mongo_db import MongoConnect
 from src.constants.mongo import MONGO_URL,DB_NAME,TRAINING_COLLECTION_NAME
 
@@ -44,18 +44,20 @@ class DataIngestionComponent:
 
 
 
-        @handle_exceptions
-        def export_raw_data_into_feature_store(self)->pd.DataFrame:
-            connection = MongoConnect()
+        #@handle_exceptions
+        def export_raw_data_into_feature_store(self):
+            connection = MongoConnect() 
             connection.mongo_connection(MONGO_URL,DB_NAME) 
             #artifact > timestamp > feature_store | ingested_data 
+            print("connection succesfull")
             connection.ingest_with_fs(target_dir=self.data_ingestion_config.feature_store_dir,collection_name=self.data_ingestion_config.training_collection_name)
+            print("ingestion with fs successfull")
             
 
 
         
 
-        @handle_exceptions
+        #@handle_exceptions
         def split_train_test(self,df:pd.DataFrame)->None:
             """
                 This method takes a DataFrame, splits it into train and test sets using the specified split ratio,
@@ -77,19 +79,23 @@ class DataIngestionComponent:
 
 
 
-        @handle_exceptions
+        #@handle_exceptions
         def run_data_ingestion(self)->DataIngestionArtifact:
 
             self.export_raw_data_into_feature_store() 
             #here merge operation should come into play: merge multiple dataframes into single dataframe
-            csv_path_list=[] # this should come from validated data artifact
-            merge_csv_files(csv_path_list)
-            self.split_train_test(df)
+            #csv_path_list=[] # this should come from validated data artifact
+            #merge_csv_files(csv_path_list)
+            #self.split_train_test(df)
+            print("all files ingested")
             data_ingestion_artifact= DataIngestionArtifact(
+                feature_store= self.data_ingestion_config.feature_store_dir,
                 train_file_path=self.data_ingestion_config.training_file_path,
-                test_file_path= self.data_ingestion_config.testing_file_path
+                test_file_path = self.data_ingestion_config.testing_file_path,
+
             )
-            return data_ingestion_artifact # for the next stage
+            print(data_ingestion_artifact)
+            return data_ingestion_artifact 
 
 
 

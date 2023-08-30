@@ -67,6 +67,9 @@ class DataValidationComponent:
         if missing_cols:
             print("missing cols: ",missing_cols)
             return False 
+        for col_name, expected_dtype in self.cols.items():
+            if df[col_name].dtype != expected_dtype:
+                return False
         
         return True
 
@@ -165,7 +168,9 @@ class DataValidationComponent:
 
 
     def run_data_validation(self):
-        feature_store_dir = "C:/Users/ayhan\Desktop/predictive-wafer-maintenance/artifact/30_08_2023_14_02/data_ingestion/feature_store"
+        
+        #feature_store_dir = "C:/Users/ayhan\Desktop/predictive-wafer-maintenance/artifact/30_08_2023_14_02/data_ingestion/feature_store"
+        feature_store_dir = self.data_ingestion_artifact.feature_store
         csv_path_list = os.listdir(feature_store_dir)
         for csv_path in csv_path_list:
             file_path = os.path.join(feature_store_dir,csv_path)

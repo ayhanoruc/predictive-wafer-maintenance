@@ -25,7 +25,16 @@ class CustomException(Exception):
 
 
 
-
+def handle_exceptions(func):
+    def wrapper(*args,**kwargs):
+        try:
+            return func(*args,**kwargs)
+            
+        except Exception as e :
+            exc = CustomException(e,sys)
+            args[0].log_writer.handle_logging(exc,level=logging.ERROR)
+            raise exc 
+    return wrapper 
 
 
 if __name__ == "__main__":

@@ -7,7 +7,7 @@ import logging
 
 
 
-from src.exception_handler import CustomException
+from src.exception_handler import CustomException, handle_exceptions
 from src.log_handler import AppLogger 
 from src.entity.config_entity import DataIngestionConfig
 from src.entity.artifact_entity import DataIngestionArtifact 
@@ -16,17 +16,20 @@ from src.data_access.mongo_db import MongoConnect
 from src.constants.mongo import MONGO_URL,DB_NAME,TRAINING_COLLECTION_NAME
 
 from src.utility.generic import write_to_csv, export_csv_to_df,merge_csv_files
+
 #from src.constants.training_pipeline impo
 
 
-def handle_exceptions(func):
+"""def handle_exceptions(func):
     def wrapper(*args,**kwargs):
         try:
             return func(*args,**kwargs)
+            
         except Exception as e :
             exc = CustomException(e,sys)
             args[0].log_writer.handle_logging(exc,level=logging.ERROR)
             raise exc 
+    return wrapper """
 
 
 class DataIngestionComponent:
@@ -44,20 +47,20 @@ class DataIngestionComponent:
 
 
 
-        #@handle_exceptions
+        @handle_exceptions
         def export_raw_data_into_feature_store(self):
             connection = MongoConnect() 
             connection.mongo_connection(MONGO_URL,DB_NAME) 
             #artifact > timestamp > feature_store | ingested_data 
-            print("connection succesfull")
+            self.log_writer.handle_logging("RAW DATA INGESTION STARTED")
             connection.ingest_with_fs(target_dir=self.data_ingestion_config.feature_store_dir,collection_name=self.data_ingestion_config.training_collection_name)
-            print("ingestion with fs successfull")
+            self.log_writer.handle_logging("RAW DATA INGESTION ENDED")
             
 
 
         
 
-        #@handle_exceptions
+        @handle_exceptions
         def split_train_test(self,df:pd.DataFrame)->None:
             """
                 This method takes a DataFrame, splits it into train and test sets using the specified split ratio,
@@ -79,22 +82,21 @@ class DataIngestionComponent:
 
 
 
-        #@handle_exceptions
+        @handle_exceptions
         def run_data_ingestion(self)->DataIngestionArtifact:
-
+            self.log_writer.handle_logging("-------------ENTERED RAW DATA INGESTION STAGE------------")
             self.export_raw_data_into_feature_store() 
             #here merge operation should come into play: merge multiple dataframes into single dataframe
             #csv_path_list=[] # this should come from validated data artifact
             #merge_csv_files(csv_path_list)
             #self.split_train_test(df)
-            print("all files ingested")
+
             data_ingestion_artifact= DataIngestionArtifact(
                 feature_store= self.data_ingestion_config.feature_store_dir,
                 train_file_path=self.data_ingestion_config.training_file_path,
                 test_file_path = self.data_ingestion_config.testing_file_path,
 
             )
-            print(data_ingestion_artifact)
             return data_ingestion_artifact 
 
 

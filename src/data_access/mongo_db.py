@@ -1,7 +1,7 @@
 from pymongo import  MongoClient 
 from gridfs import GridFS
 import os 
-from src.exception_handler import CustomException
+from src.exception_handler import CustomException, handle_exceptions
 from src.log_handler import AppLogger
 import logging
 from config import PROJECT_ROOT
@@ -19,21 +19,17 @@ class MongoConnect:
 
 
         
-
+    @handle_exceptions
     def mongo_connection(self,mongo_url:str,db_name:str)->None:
-        try:
 
-            self.client = MongoClient(mongo_url)        
-            self.database = self.client[db_name]
-            self.gridfs = GridFS(self.database)
-            self.log_writer.handle_logging("CONNECTION: SUCCESSFULL")
+        self.client = MongoClient(mongo_url)        
+        self.database = self.client[db_name]
+        self.gridfs = GridFS(self.database)
+        self.log_writer.handle_logging(f"MONGO CONNECTION: connected to {mongo_url},{db_name} succesfully!")
             
-        except Exception as e:
-            exception = CustomException(e,sys) 
-            self.log_writer.handle_logging(exception,level=logging.ERROR)
-            raise exception
 
     # USE FS 
+    @handle_exceptions
     def insert_with_fs(self,csv_path_list, collection_name):
         for file_path in csv_path_list:
             metadata = {"collection_name": collection_name}
@@ -45,11 +41,10 @@ class MongoConnect:
 
 
                 
-            
+    @handle_exceptions 
     def ingest_with_fs(self,target_dir,collection_name):
         ingested_data_dir = os.path.join(target_dir)
         os.makedirs(ingested_data_dir,exist_ok=True)
-        print("ENTER INGESTION AREA")
         for file in self.gridfs.find({"metadata.collection_name": collection_name}):
             file_data= file.read()
             file_name = os.path.basename(file.filename)
@@ -57,7 +52,7 @@ class MongoConnect:
 
             with open(file_path,"wb") as f:
                 f.write(file_data)
-                print(f"Saved file {file_name} from {collection_name}")
+                self.log_writer.handle_logging(f"Saved file {file_name} from {collection_name} to {ingested_data_dir}")
 
 
 

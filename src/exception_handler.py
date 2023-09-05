@@ -7,7 +7,7 @@ def get_error_message(error, error_detail:sys):
     _,_,exc_tb = error_detail.exc_info()
     file_name = exc_tb.tb_frame.f_code.co_filename 
     error_line = exc_tb.tb_lineno
-    error_message = f"Error occured at [{file_name}] at line number [{error_line}]  error message: [{error}] "
+    error_message = f"Error occured at [{file_name}] at line number [{error_line}]  error message: [{error}] " # customized error message
     
     return error_message
 

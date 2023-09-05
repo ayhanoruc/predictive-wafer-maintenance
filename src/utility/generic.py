@@ -30,7 +30,7 @@ def read_json_file(file_path:str)->dict:
 
 
 def create_regex():
-    #wafer-fault-training-collection_
+    #wafer-fault-training-collection_...
     filename_pattern = r"^wafer-raw-training-collection_Wafer_(?P<DateStamp>\d{8})_(?P<TimeStamp>\d{6})\.csv$"
     re_object = re.compile(filename_pattern,re.IGNORECASE)
     return re_object

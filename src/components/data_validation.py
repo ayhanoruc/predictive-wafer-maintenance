@@ -20,17 +20,18 @@ class DataValidationComponent:
     def __init__(self,data_validation_config:DataValidationConfig, data_ingestion_artifact:DataIngestionArtifact):
         self.data_validation_config = data_validation_config
         self.data_ingestion_artifact = data_ingestion_artifact
-        self.training_schema = read_json_file(TRAINING_SCHEMA_FILE_PATH)
+        self.training_schema = read_json_file(TRAINING_SCHEMA_FILE_PATH) # data sharring agreement schema
         self.sample_file_name = self.training_schema["SampleFileName"]
         self.date_length = self.training_schema["LengthOfDateStampInFile"]
         self.timestamp_length= self.training_schema["LengthOfTimeStampInFile"]
+        self.cols= self.training_schema["col_name"]
+        self.missing_threshold= self.training_schema["MissingThreshold"]
 
         #self.nu_of_cols= self.training_schema["NumberofColumns"]
         #self.col_names = set(self.training_schema["col_name"].keys())
         #self.col_dtypes = set(self.training_schema["col_name"].values())
 
-        self.cols= self.training_schema["col_name"]
-        self.missing_threshold= self.training_schema["MissingThreshold"]
+
 
         self.log_writer = AppLogger("DataValidation")
 
@@ -46,11 +47,11 @@ class DataValidationComponent:
         file_name= os.path.basename(file_path)
         self.log_writer.handle_logging(f"Filename validation stage for {file_name}")
         re_obj= create_regex()
-        return check_regex_match(re_obj,file_name)
+        return check_regex_match(re_obj,file_name) # returns boolean
     
     
 
-    @handle_exceptions
+    """@handle_exceptions
     def validate_columns(self,file_path):
         df = pd.read_csv(file_path)
         
@@ -64,7 +65,7 @@ class DataValidationComponent:
             if df[col_name].dtype != expected_dtype:
                 return False 
             print(f"col_name {col_name} found")
-        return True
+        return True"""
 
 
     @handle_exceptions
@@ -79,7 +80,7 @@ class DataValidationComponent:
             return False 
         for col_name, expected_dtype in self.cols.items():
             if str(df[col_name].dtype) not in expected_dtype:
-                print(col_name,df[col_name].dtype, expected_dtype)
+                print(col_name,df[col_name].dtype, expected_dtype,": are missing")
                 return False
         
         return True
@@ -120,7 +121,7 @@ class DataValidationComponent:
     
     @handle_exceptions
     def check_all_conditions(self, file_path):
-        self.log_writer.handle_logging("Validation Check Stages just started...")
+        self.log_writer.handle_logging("Validation Check Stages is started...")
         if self.validate_file_name(file_path):
             self.log_writer.handle_logging(f"Filename Validated!")
             if self.validate_columns_2(file_path):
@@ -133,7 +134,7 @@ class DataValidationComponent:
                         valid_data_path = self.data_validation_config.valid_training_data_dir
                         os.makedirs(valid_data_path,exist_ok=True)
                         print(os.path.basename(file_path))
-                        shutil.move(file_path,os.path.join(valid_data_path,os.path.basename(file_path)))
+                        shutil.move(file_path,os.path.join(valid_data_path,os.path.basename(file_path))) # öncesinde copy yapıp sonra move da edilebilir.
                     
                     else:
                         #print("invalid")

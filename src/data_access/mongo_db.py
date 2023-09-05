@@ -31,8 +31,9 @@ class MongoConnect:
     # USE FS 
     @handle_exceptions
     def insert_with_fs(self,csv_path_list, collection_name):
+        metadata = {"collection_name": collection_name} # re-placed
         for file_path in csv_path_list:
-            metadata = {"collection_name": collection_name}
+            
             with open(file_path,'rb') as f:
                 
                 file_name = f"{collection_name}_{os.path.basename(file_path)}"
@@ -43,7 +44,7 @@ class MongoConnect:
                 
     @handle_exceptions 
     def ingest_with_fs(self,target_dir,collection_name):
-        ingested_data_dir = os.path.join(target_dir)
+        ingested_data_dir = os.path.join(target_dir) #review this line
         os.makedirs(ingested_data_dir,exist_ok=True)
         for file in self.gridfs.find({"metadata.collection_name": collection_name}):
             file_data= file.read()

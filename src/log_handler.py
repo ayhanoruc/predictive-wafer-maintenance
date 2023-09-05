@@ -43,7 +43,9 @@ class AppLogger():
             logging.Logger: A configured logger instance.
         """
 
-        logger = logging.getLogger(self.phase_name)
+
+        
+        logger = logging.getLogger(self.phase_name) # logger initalization
         logger.setLevel(logging.INFO) # common use
 
         formatter = logging.Formatter("[%(asctime)s - %(name)s -- %(levelname)s -- %(message)s]")
@@ -67,7 +69,7 @@ class AppLogger():
             message (str): The log message to be recorded.
             level(logging.level): The severity of logging message
         """
-        self.logger.log(level,message)
+        self.logger.log(level=level, msg=message)
 
 
 

@@ -9,3 +9,4 @@ results.txt
 test.py
 *ingested_data*
 *artifact*
+*.csv*

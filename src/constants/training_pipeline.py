@@ -31,3 +31,13 @@ DATA_VALIDATION_VALID_DIR = "valid"
 DATA_VALIDATION_INVALID_DIR = "invalid"
 MONGO_VALID_COLLECTION_NAME = "wafer-valid-training-collection"
 MONGO_INVALID_COLLECTION_NAME = "wafer-invalid-training_collection"
+
+# constants related to DataTransformation component
+
+DATA_TRANSFORMATION_DIR= "data_transformation"
+DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR = "transformed"
+DATA_TRANSFORMATION_OBJECT_DIR = "preprocessor_object"
+PREPROCESSOR_OBJECT_FILE_NAME = "preprocessor.pkl"
+TRAIN_TEST_SPLIT_RATIO = 0.2
+
+

@@ -88,7 +88,7 @@ class ModelTrainerComponent:
 
 
     @handle_exceptions    
-    def eval_model(self)->int: 
+    def eval_model(self)->tuple: 
         """
         This will return cost related to a specific training/testing stage
         by model object using best_model params and threshold value if exists

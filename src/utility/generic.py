@@ -75,3 +75,16 @@ def load_object(file_path:str)->object:
     with open(file_path, "rb") as f:
         return dill.load(f)
 
+
+def load_data(valid_data_dir:str)->pd.DataFrame:
+    csv_file_list = os.listdir(valid_data_dir)
+    df_merged = pd.DataFrame()
+    for file in csv_file_list:
+        file_path = os.path.join(valid_data_dir,file)
+        df = pd.read_csv(file_path)
+        df_merged = pd.concat(objs=[df_merged,df],ignore_index=True) # merged around axis=0
+        df_merged.drop(columns=["Wafer"],inplace=True)
+        filt = df_merged["Good/Bad"]==1
+        df_merged["Good/Bad"] = np.where(filt,1,0)
+
+    return df_merged 

@@ -1,5 +1,5 @@
 from sklearn.metrics import confusion_matrix
-
+from sklearn.metrics import f1_score, roc_auc_score
 
 
 
@@ -10,4 +10,7 @@ def cost_function(true,pred)->int:
 
 
 def get_classification_metrics(true,pred)->tuple:
-    pass 
+    cost = cost_function(true,pred)
+    f1 = f1_score(true,pred)
+    roc_auc = roc_auc_score(true,pred)
+    return (f1,roc_auc,cost)  

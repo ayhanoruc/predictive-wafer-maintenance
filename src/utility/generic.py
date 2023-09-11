@@ -1,6 +1,7 @@
 
 import pandas as pd 
 import re
+import numpy as np
 import os
 import json 
 from src.exception_handler import CustomException
@@ -47,7 +48,7 @@ def save_numpy_array_data(file_path:str, array:np.array)->None:
     array: np.array data to save
     """
     dir_path = os.path.dirname(file_path)
-    os.make_dirs(dir_path, exist_ok=True)
+    os.makedirs(dir_path, exist_ok=True)
     with open(file_path, "wb") as f:
         np.save(f,array)
     

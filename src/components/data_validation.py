@@ -6,7 +6,7 @@ import shutil
 from src.exception_handler import CustomException, handle_exceptions
 from src.log_handler import AppLogger
 from src.entity.config_entity import DataValidationConfig
-from src.entity.artifact_entity import DataIngestionArtifact
+from src.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
 from src.utility.generic import read_json_file
 from src.constants.training_pipeline import TRAINING_SCHEMA_FILE_PATH
 from src.utility.generic import create_regex, check_regex_match
@@ -207,4 +207,9 @@ class DataValidationComponent:
         self.post_validation_insertion()
         self.post_validation_deletion()
         
+        data_validation_artifact = DataValidationArtifact(
+            valid_data_dir= self.data_validation_config.valid_training_data_dir ,
+            invalid_data_dir= self.data_validation_config.invalid_unseen_data_dir
+        )   
+        return data_validation_artifact
     

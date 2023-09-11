@@ -57,5 +57,21 @@ class DataTransformationConfig:
         self.train_test_split_ratio = training_pipeline.TRAIN_TEST_SPLIT_RATIO
 
 
+
+class ModelTrainerConfig:
+    def __init__(self, trainin_pipeline_config:TrainingPipelineConfig):
+        
+        self.model_trainer_dir = os.path.join(trainin_pipeline_config.artifact_dir, training_pipeline.MODEL_TRAINER_DIR_NAME)
+
+        self.model_trainer_trained_model_file_path = os.path.join(self.model_trainer_dir, training_pipeline.MODEL_TRAINER_TRAINED_MODEL_DIR, training_pipeline.MODEL_TRAINER_TRAINED_MODEL_NAME)
+
+        self.expected_roc_auc_score = training_pipeline.MODEL_TRAINER_EXPECTED_ROC_AUC_SCORE
+        self.expected_cost_score = training_pipeline.MODEL_TRAINER_EXPECTED_COST_SCORE
+        self.model_trainer_over_under_threshold = training_pipeline.MODEL_TRAINER_OVER_UNDER_THRESHOLD
+
+        
+
+
+
         
         

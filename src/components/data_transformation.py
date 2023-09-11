@@ -22,7 +22,9 @@ valid_predict_dataset_dir = "../valid_feature_store/valid_predict_data/" # test 
 
 
 class TrainingPreprocessor(BaseEstimator,TransformerMixin):
-    def __init__(self,use_y = True):
+    def __init__(self,use_y = True,important_cols=None):
+        if important_cols != None:
+            self.important_cols = important_cols
         self.use_y = use_y
 
 
@@ -34,12 +36,12 @@ class TrainingPreprocessor(BaseEstimator,TransformerMixin):
     
 
 
-    def transform(self,X,is_testing=False,important_cols=None):
+    def transform(self,X,is_testing=False):
         X_transformed = DataTransformationComponent.drop_zero_std(X)
         X_transformed = DataTransformationComponent.drop_duplicated_cols(X_transformed)
 
-        if important_cols != None:
-            X_transformed = X_transformed[important_cols]
+        if self.important_cols != None:
+            X_transformed = X_transformed[self.important_cols]
 
         imputer = SimpleImputer(strategy="constant",fill_value=0)
         X_transformed = imputer.fit_transform(X_transformed)
@@ -64,9 +66,9 @@ class DataTransformationComponent:
         self.data_transformation_config  = data_transformation_config
         self.data_validation_artifact = data_validation_artifact
         self.valid_train_dataset_dir = "./valid_feature_store/valid_training_data/" # test purpose
+        self.important_cols = None
         
         #self.valid_train_dataset_dir = self.data_validation_artifact.valid_data_dir
-        #self.important_cols = DataTransformationComponent.get_important_cols()
 
 
         self.log_writer = AppLogger("DataTransformation")
@@ -133,20 +135,19 @@ class DataTransformationComponent:
 
 
     @handle_exceptions
-    def get_important_cols(self,dataframe:pd.DataFrame)->list:
+    def set_important_cols(self,dataframe:pd.DataFrame)->list:
         df_corr = pd.DataFrame()
         df_corr["Sensor_id"] = dataframe.columns[:-1].tolist()
         corr_score = [abs(round(dataframe[[col,"Good/Bad"]].corr().iloc[0,1],4)) for col in dataframe.columns[:-1]]
         df_corr["corr"] = corr_score
-        important_cols = df_corr.sort_values(by="corr",ascending=False)[:200]["Sensor_id"].to_list()
-
-        return important_cols   # without Target Column
+        self.important_cols = df_corr.sort_values(by="corr",ascending=False)[:200]["Sensor_id"].to_list()
+        
 
 
     @handle_exceptions
     def get_preprocessor(self):
 
-        preprocessor = TrainingPreprocessor()
+        preprocessor = TrainingPreprocessor(important_cols = self.important_cols)
   
         return preprocessor
 
@@ -168,14 +169,14 @@ class DataTransformationComponent:
         X_train, X_test, y_train, y_test = self.create_train_test(train_df_merged)
         self.log_writer.handle_logging("Train/test split applied succesfully.")
 
-        important_cols = self.get_important_cols(train_df_merged)
+        self.set_important_cols(train_df_merged)
         preprocessor = self.get_preprocessor()
         self.log_writer.handle_logging("Preprocessor pipeline object initialized succesfully.")
 
         preprocessor_obj= preprocessor.fit(X_train,y_train) 
         self.log_writer.handle_logging("Preprocessor object fitted succesfully. mean_ and scale_ are stored inside the object.")
 
-        X_train_transformed, y_train_transformed = preprocessor_obj.transform(X_train, is_testing=False,important_cols=important_cols)
+        X_train_transformed, y_train_transformed = preprocessor_obj.transform(X_train, is_testing=False)
         X_test_transformed = preprocessor_obj.transform(X_test, is_testing=True)
         self.log_writer.handle_logging("Train/test dataframes are transformed succesfully!")
 

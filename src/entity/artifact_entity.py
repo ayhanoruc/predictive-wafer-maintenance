@@ -25,3 +25,19 @@ class DataTransformationArtifact:
     preprocessor_object_file_path : str
 
 
+@dataclass 
+class ClassificationMetricsArtifact:
+    f1_score : float
+    roc_auc_score : float 
+    cost_score : int 
+
+
+@dataclass
+class ModelTrainerArtifact:
+    trained_model_file_path:str 
+    train_metric_artifact : None
+    test_metric_artifact  : ClassificationMetrics
+
+ 
+
+

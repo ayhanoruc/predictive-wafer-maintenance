@@ -209,7 +209,7 @@ class DataValidationComponent:
         
         data_validation_artifact = DataValidationArtifact(
             valid_data_dir= self.data_validation_config.valid_training_data_dir ,
-            invalid_data_dir= self.data_validation_config.invalid_unseen_data_dir
+            invalid_data_dir= self.data_validation_config.invalid_training_data_dir
         )   
         return data_validation_artifact
     

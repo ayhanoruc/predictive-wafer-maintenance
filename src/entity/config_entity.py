@@ -67,7 +67,16 @@ class ModelTrainerConfig:
 
         self.expected_roc_auc_score = training_pipeline.MODEL_TRAINER_EXPECTED_ROC_AUC_SCORE
         self.expected_cost_score = training_pipeline.MODEL_TRAINER_EXPECTED_COST_SCORE
-        self.model_trainer_over_under_threshold = training_pipeline.MODEL_TRAINER_OVER_UNDER_THRESHOLD
+
+
+class ModelEvaluationConfig:
+
+    def __init__(self, trainin_pipeline_config:TrainingPipelineConfig):
+
+        self.model_evaluation_dir =  os.path.join(trainin_pipeline_config.artifact_dir,training_pipeline.MODEL_EVALUATION_DIR)
+        self.report_file_path = os.path.join(self.model_evaluation_dir,training_pipeline.MODEL_EVALUATION_REPORT_NAME)
+        self.model_shift_threshold = training_pipeline.MODEL_SHIFT_THRESHOLD
+        
 
         
 

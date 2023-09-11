@@ -12,6 +12,8 @@ PREDICTION_SCHEMA_FILE_PATH = os.path.join(PROJECT_ROOT,"DSA","prediction_schema
 SCHEMA_DROP_COLS = "drop_cols"
 TRAIN_FILE_NAME = "train.csv"
 TEST_FILE_NAME = "test.csv"
+MODEL_FILE_NAME = "model.pkl"
+
 
 # constants related to DataIngestion component
 
@@ -48,7 +50,15 @@ MODEL_TRAINER_TRAINED_MODEL_DIR = "trained_model"
 MODEL_TRAINER_TRAINED_MODEL_NAME = "model.pkl"
 MODEL_TRAINER_EXPECTED_ROC_AUC_SCORE = 0.6
 MODEL_TRAINER_EXPECTED_COST_SCORE = 140
-MODEL_TRAINER_OVER_UNDER_THRESHOLD = 0.05 # %5
 
+
+
+# constants related to Model Evaluation
+
+
+MODEL_EVALUATION_DIR = "model_evaluation"
+MODEL_EVALUATION_REPORT_NAME = "report.yaml"
+SAVED_MODEL_DIR= os.path.join("saved_models")
+MODEL_SHIFT_THRESHOLD = 0.2
 
 

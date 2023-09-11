@@ -62,7 +62,9 @@ class ModelTrainerComponent:
     
     @handle_exceptions
     def perform_hyperparams_opt(self,):
-    
+
+        self.log_writer.handle_logging("Hyperparams optimization initialized! Cost is being minimized!")
+
         study = optuna.create_study(direction="minimize")
         study.optimize(self.objective, n_trials=5) # will take approximately 4-5 mins depending on your pc config.
         #test etmek için n_trials'ı 5 yap
@@ -72,6 +74,7 @@ class ModelTrainerComponent:
         self.best_threshold = best_params["threshold"]
         best_params.pop("threshold",None)
         self.best_model_params = best_params
+        self.log_writer.handle_logging("The Hyperparams optimization study completed succesfully!")
 
 
          
@@ -80,12 +83,11 @@ class ModelTrainerComponent:
     def train_model(self,X_train,y_train)->XGBClassifier():
 
         self.model.fit(X_train,y_train)
+        self.log_writer.handle_logging("The model fitted to training data succesfully.")
         return self.model 
 
 
-    def 
-
-    
+    @handle_exceptions    
     def eval_model(self)->int: 
         """
         This will return cost related to a specific training/testing stage
@@ -111,14 +113,17 @@ class ModelTrainerComponent:
     
         return (f1_score,roc_auc_score,test_cost)
 
-
+    
     def run_model_trainer(self,)-> ModelTrainerArtifact:
+        self.log_writer.handle_logging("-------------ENTERED MODEL TRAINER STAGE------------")
         
+        self.log_writer.handle_logging("Reading Training & testing datasets ")
         train_data_file_path= self.data_transformation_artifact.transformed_train_file_path
         test_data_file_path = self.data_transformation_artifact.transformed_test_file_path 
 
         train_arr = load_numpy_array_data(train_data_file_path)
         test_arr = load_numpy_array_data(test_data_file_path)
+        
 
         self.X_train, self.y_train, self.X_test, self.y_test = (
             train_arr[:,:-1],
@@ -126,10 +131,11 @@ class ModelTrainerComponent:
             test_arr[:,:-1],
             test_arr[:,-1]
         )
-
+        self.log_writer.handle_logging("Training & testing numpy arrays are loaded succesfully!")
         
 
         f1_score,roc_auc_score,test_cost = self.eval_model()
+        
 
         if test_cost > self.model_trainer_config.expected_cost_score:
             self.log_writer.handle_logging("expected cost_score is not satisfied")
@@ -140,7 +146,7 @@ class ModelTrainerComponent:
             self.log_writer.handle_logging("expected roc_auc_score is not satisfied")
             raise Exception("expected roc_auc_score is not satisfied, try to do more Experimentation")
 
-
+        self.log_writer.handle_logging("Calculated related metrics succesfully! Model is satistactory and is being saved!")
         # if no exceptions raised -> save the model
         model_file_path = self.model_trainer_config.model_trainer_trained_model_file_path
         model_dir = os.path.dirname(self.model_trainer_config.model_trainer_trained_model_file_path)
@@ -149,19 +155,21 @@ class ModelTrainerComponent:
 
         ready_model = ReadyModel(preprocessor=preprocessor_obj, model = self.model)
         save_object(model_file_path, ready_model)
+        self.log_writer.handle_logging(f"ready to predict model is generated & saved succesfully!!! send to {model_file_path}")
 
         classification_metrics_artifact = ClassificationMetricsArtifact(
+
             f1_score = f1_score,
             roc_auc_score = roc_auc_score,
-            cost_score = test_cost
-        )
+            cost_score = test_cost)
+
 
         model_trainer_artifact = ModelTrainerArtifact(
             trained_model_file_path = model_file_path,
             train_metric_artifact = None,
-            test_metric_artifact = classification_metrics_artifact
-        )
-
+            test_metric_artifact = classification_metrics_artifact)
+        
+        self.log_writer.handle_logging("Model Trainer Artifact Generated Succesfully!")
 
         return  model_trainer_artifact
         

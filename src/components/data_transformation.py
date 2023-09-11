@@ -157,6 +157,7 @@ class DataTransformationComponent:
 
         
         self.log_writer.handle_logging("-------------ENTERED DATA TRANSFORMATION STAGE------------")
+
         train_df_merged = self.restore_original_data()
         self.log_writer.handle_logging("Dataset gathered.")
          # use this valid_train_dataset_dir

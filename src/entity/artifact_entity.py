@@ -15,7 +15,6 @@ class DataValidationArtifact:
 
     valid_data_dir:str 
     invalid_data_dir:str
-    
 
 @dataclass 
 class DataTransformationArtifact:
@@ -36,8 +35,19 @@ class ClassificationMetricsArtifact:
 class ModelTrainerArtifact:
     trained_model_file_path:str 
     train_metric_artifact : None
-    test_metric_artifact  : ClassificationMetrics
+    test_metric_artifact  : ClassificationMetricsArtifact
+
+
 
  
-
+@dataclass 
+class ModelEvaluationArtifact:
+    
+    is_model_accepted:bool
+    improved_cost_score:bool
+    improved_roc_auc_score:bool
+    best_model_path:str 
+    trained_model_file_path: str 
+    trained_model_metrics_artifact: ClassificationMetricsArtifact
+    best_model_metrics_artifact: ClassificationMetricsArtifact
 

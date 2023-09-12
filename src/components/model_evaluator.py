@@ -53,7 +53,7 @@ class ModelEvaluatorComponent:
         # aynı şekilde current modelimiz de bi önceki step olan modeltrainer'dan preprocessor_obj ve model_obj olarak model_trainer_artifact'te depolandı
         # bunu modeltrainer artifactten load ederiz, böylece her iki model de predicte hazır durumda olur
 
-        valid_train_data_dir = self.data_validation_artifact.valid_data_dir # buna gerek olmayabilir.
+        valid_train_data_dir = self.data_validation_artifact.valid_data_dir 
         test_df = load_data(valid_train_data_dir)
         X= test_df.iloc[:,:-1]
         y= test_df.iloc[:,-1]

@@ -28,7 +28,7 @@ class DataIngestionComponent:
             self.log_writer = AppLogger(phase_name="DataIngestion")
 
             self.data_ingestion_config = data_ingestion_config
-            #self.schema_config = read_yaml_file(SCHEMA_FILE_PATH)
+       
 
 
 

@@ -62,3 +62,8 @@ SAVED_MODEL_DIR= os.path.join("saved_models")
 MODEL_SHIFT_THRESHOLD = 0.01
 
 
+# constants related to Model Pusher
+
+MODEL_PUSHER_DIR = "model_pusher"
+MODEL_PUSHER_SAVED_MODEL_DIR = SAVED_MODEL_DIR
+

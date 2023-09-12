@@ -1,10 +1,10 @@
-from src.utility.generic import save_object , load_object, load_data
+from src.utility.generic import save_object , load_object, load_data, write_json_file
 from src.utility.metrics.classification_metrics import get_classification_metrics
 
 from src.exception_handler import CustomException , handle_exceptions
 from src.log_handler import AppLogger
 
-from src.entity.artifact_entity import DataValidationArtifact, ModelTrainerArtifact, ModelEvaluationArtifact, DataTransformationArtifact
+from src.entity.artifact_entity import DataValidationArtifact, ModelTrainerArtifact, ModelEvaluationArtifact, DataTransformationArtifact, ClassificationMetricsArtifact
 from src.entity.config_entity import ModelEvaluationConfig, ModelTrainerConfig
 from src.components.data_transformation import DataTransformationComponent, TrainingPreprocessor
 from src.components.model_trainer import ModelTrainerComponent
@@ -16,26 +16,20 @@ import pandas as pd
 import numpy as np 
 
 import os,sys
+import shutil
+
 
 
 class ModelEvaluatorComponent:
 
     def __init__(self,model_evaluation_config:ModelEvaluationConfig,
                  data_validation_artifact:DataValidationArtifact,
-                 model_trainer_artifact:ModelTrainerArtifact,
-                 data_transformation_component:DataTransformationComponent,
-                 model_trainer_component:ModelTrainerComponent,
-                 model_trainer_config:ModelTrainerConfig):
+                 model_trainer_artifact:ModelTrainerArtifact):
         
         self.model_evaluation_config= model_evaluation_config
-
-        self.data_validation_artifact = data_validation_artifact
-        self.data_transformation_component = data_transformation_component
-        
-        
-        self.model_trainer_config = model_trainer_config 
-        self.model_trainer_component = model_trainer_component
         self.model_trainer_artifact = model_trainer_artifact
+        self.data_validation_artifact = data_validation_artifact
+        
 
         
         self.log_writer = AppLogger("Model Evaluator Component")
@@ -69,25 +63,41 @@ class ModelEvaluatorComponent:
 
 
         model_resolver = ModelResolver()
-        if not model_resolver.is_a_model_exists():
+        if not model_resolver.is_a_model_exists(): # if no best model exists, save as best model w/out comparison process
+
             model_evaluation_artifact = ModelEvaluationArtifact(
                 is_model_accepted = is_model_accepted,
-                improved_cost_score = None,
-                improved_roc_auc_score= None,
+                improved_cost_score = 0.0,
+                improved_roc_auc_score= 0.0,
                 trained_model_file_path= trained_model_file_path,
-                trained_model_metrics_artifact=self.model_trainer_artifact.test_metric_artifact,###!!!
-                best_model_metrics_artifact= None 
+                trained_model_metrics_artifact=self.model_trainer_artifact.test_metric_artifact,
+                best_model_metrics_artifact= self.model_trainer_artifact.test_metric_artifact 
             ) 
+            return model_evaluation_artifact
+        
 
         best_model_path:str = model_resolver.get_best_model_path()
         best_ready_model:ReadyModel = load_object(best_model_path)
-        current_ready_model:ReadyModel = load_object(trained_model_file_path)
+        current_ready_model:ReadyModel = load_object(trained_model_file_path) 
+        #tek model oldugunda kendisiyle kıyaslayacak, logic daha farklı kurulabilir ama bu da pratik bir implementation
 
         best_model_y_pred = best_ready_model.predict(X,threshold)
         current_model_y_pred = current_ready_model.predict(X,threshold)
 
         best_model_f1_score,best_model_roc_auc_score,best_model_test_cost = get_classification_metrics(y,best_model_y_pred)
         current_f1_score,current_roc_auc_score,current_test_cost = get_classification_metrics(y,current_model_y_pred)
+
+        #             >>>>  get_classification_metrics'i ClassificationMetricsArtifact döndürecek hale getirsem daha iyi olur <<<<<<<<<<<<<<<<
+
+        current_model_metrics_artifact = ClassificationMetricsArtifact(
+            f1_score= current_f1_score,
+            roc_auc_score= current_roc_auc_score,
+            cost_score= current_test_cost
+        )
+        best_model_metrics_artifact = ClassificationMetricsArtifact(
+        f1_score= best_model_f1_score,
+        roc_auc_score= best_model_roc_auc_score,
+        cost_score= best_model_test_cost)
 
         # COMPARISON
         # calculate and normalize the change in related metric scores
@@ -96,19 +106,28 @@ class ModelEvaluatorComponent:
         cost_score_diff = (current_test_cost - best_model_test_cost)/ best_model_test_cost # we need to minimize this
 
 
-
+        # in this project, be more concerned about total cost score
         if cost_score_diff < -0.01:
             is_model_accepted = True
         else:
             is_model_accepted = False 
-            
 
         
+        model_evaluation_artifact = ModelEvaluationArtifact(
+            is_model_accepted=is_model_accepted,
+            improved_f1_score = f1_score_diff,
+            improved_roc_auc_score= roc_auc_score_diff,
+            best_model_path = best_model_path ,# this can change over time, so it is a good practice to update here
+            trained_model_file_path = trained_model_file_path,
+            trained_model_metrics_artifact = current_model_metrics_artifact,
+            best_model_metrics_artifact = best_model_metrics_artifact
+        )
+        self.log_writer.handle_logging(f"Model evaluation artifact : {model_evaluation_artifact}")
 
+        model_eval_report = model_evaluation_artifact.__dict__
+        write_json_file(self.model_evaluation_config.report_file_path,model_eval_report)
 
-        
-
-
+        return model_evaluation_artifact
 
         """
         listdir-> merge csv files -> 
@@ -119,8 +138,7 @@ class ModelEvaluatorComponent:
         calculate score differences for roc_auc & cost 
         check if model_shift_threshold is met: change is_accepted based on this (True by default)
         update model_evaluation artifact and return it 
-
-
+        
         """
 
  

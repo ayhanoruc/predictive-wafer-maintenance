@@ -28,6 +28,13 @@ def write_to_csv(dataframe:pd.DataFrame,file_path:str)->None:
 def read_json_file(file_path:str)->dict:
     with open(file_path,"r") as json_file:
         return json.load(json_file)
+    
+
+def write_json_file(file_path:str, report:dict)->None:
+    with open(file_path,"w") as json_file:
+        json.dump(report, json_file, indent=4)
+
+    
 
 
 def create_regex():

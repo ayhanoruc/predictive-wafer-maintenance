@@ -44,10 +44,17 @@ class ModelTrainerArtifact:
 class ModelEvaluationArtifact:
     
     is_model_accepted:bool
-    improved_cost_score:bool
-    improved_roc_auc_score:bool
+    improved_cost_score:float
+    improved_roc_auc_score:float
+    improved_f1_score:float
     best_model_path:str 
     trained_model_file_path: str 
     trained_model_metrics_artifact: ClassificationMetricsArtifact
     best_model_metrics_artifact: ClassificationMetricsArtifact
 
+
+
+@dataclass
+class ModelPusherArtifact:
+    saved_model_path : str
+    model_file_path : str

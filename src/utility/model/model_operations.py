@@ -1,7 +1,7 @@
 import os,sys 
 from src.constants.training_pipeline import SAVED_MODEL_DIR, MODEL_FILE_NAME
 
-
+from src.utility.generic import save_object
 
 
 class ReadyModel:
@@ -55,6 +55,8 @@ class ModelResolver:
         return os.path.join(self.saved_models_dir, f"{latest_timestamp}",MODEL_FILE_NAME) # saved_models/84449204/model.pkl
     
 
+    
+
 
     def is_a_model_exists(self)->bool:
         """
@@ -79,6 +81,7 @@ class ModelResolver:
         if not os.path.exists(best_model_path):
             return False 
         
+
         return True # otherwise
 
 

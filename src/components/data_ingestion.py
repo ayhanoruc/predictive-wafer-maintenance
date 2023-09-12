@@ -17,19 +17,8 @@ from src.constants.mongo import MONGO_URL,DB_NAME,TRAINING_COLLECTION_NAME
 
 from src.utility.generic import write_to_csv, export_csv_to_df,merge_csv_files
 
-#from src.constants.training_pipeline impo
 
 
-"""def handle_exceptions(func):
-    def wrapper(*args,**kwargs):
-        try:
-            return func(*args,**kwargs)
-            
-        except Exception as e :
-            exc = CustomException(e,sys)
-            args[0].log_writer.handle_logging(exc,level=logging.ERROR)
-            raise exc 
-    return wrapper """
 
 
 class DataIngestionComponent:

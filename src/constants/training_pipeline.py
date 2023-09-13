@@ -59,6 +59,7 @@ MODEL_TRAINER_EXPECTED_F1_SCORE = 0.1
 
 MODEL_EVALUATION_DIR = "model_evaluation"
 MODEL_EVALUATION_REPORT_NAME = "report.yaml"
+#MODEL_EVALUATION_REPORT_NAME = "report.json" << buna çevir
 SAVED_MODEL_DIR= os.path.join(PROJECT_ROOT,"saved_models")
 os.makedirs(SAVED_MODEL_DIR,exist_ok=True)
 MODEL_SHIFT_THRESHOLD = 0.01

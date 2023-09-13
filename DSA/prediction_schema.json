@@ -1,0 +1,3550 @@
+{
+    "SampleFileName": "wafer-fault-testing-collection_wafer_13012020_090817.csv",
+    "LengthOfDateStampInFile": 8,
+    "LengthOfTimeStampInFile": 6,
+    "NumberofColumns": 591,
+    "MissingThreshold": 0.5,
+    "col_name": {
+        "Wafer": "object",
+        "Sensor-1": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-2": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-3": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-4": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-5": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-6": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-7": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-8": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-9": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-10": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-11": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-12": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-13": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-14": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-15": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-16": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-17": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-18": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-19": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-20": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-21": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-22": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-23": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-24": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-25": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-26": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-27": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-28": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-29": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-30": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-31": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-32": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-33": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-34": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-35": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-36": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-37": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-38": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-39": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-40": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-41": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-42": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-43": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-44": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-45": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-46": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-47": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-48": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-49": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-50": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-51": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-52": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-53": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-54": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-55": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-56": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-57": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-58": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-59": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-60": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-61": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-62": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-63": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-64": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-65": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-66": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-67": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-68": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-69": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-70": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-71": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-72": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-73": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-74": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-75": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-76": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-77": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-78": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-79": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-80": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-81": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-82": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-83": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-84": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-85": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-86": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-87": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-88": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-89": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-90": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-91": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-92": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-93": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-94": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-95": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-96": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-97": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-98": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-99": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-100": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-101": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-102": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-103": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-104": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-105": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-106": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-107": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-108": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-109": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-110": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-111": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-112": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-113": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-114": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-115": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-116": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-117": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-118": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-119": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-120": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-121": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-122": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-123": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-124": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-125": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-126": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-127": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-128": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-129": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-130": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-131": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-132": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-133": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-134": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-135": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-136": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-137": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-138": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-139": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-140": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-141": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-142": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-143": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-144": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-145": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-146": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-147": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-148": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-149": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-150": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-151": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-152": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-153": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-154": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-155": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-156": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-157": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-158": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-159": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-160": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-161": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-162": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-163": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-164": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-165": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-166": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-167": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-168": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-169": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-170": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-171": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-172": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-173": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-174": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-175": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-176": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-177": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-178": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-179": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-180": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-181": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-182": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-183": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-184": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-185": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-186": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-187": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-188": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-189": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-190": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-191": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-192": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-193": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-194": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-195": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-196": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-197": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-198": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-199": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-200": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-201": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-202": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-203": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-204": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-205": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-206": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-207": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-208": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-209": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-210": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-211": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-212": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-213": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-214": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-215": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-216": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-217": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-218": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-219": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-220": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-221": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-222": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-223": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-224": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-225": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-226": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-227": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-228": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-229": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-230": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-231": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-232": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-233": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-234": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-235": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-236": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-237": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-238": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-239": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-240": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-241": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-242": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-243": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-244": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-245": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-246": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-247": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-248": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-249": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-250": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-251": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-252": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-253": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-254": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-255": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-256": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-257": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-258": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-259": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-260": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-261": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-262": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-263": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-264": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-265": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-266": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-267": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-268": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-269": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-270": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-271": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-272": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-273": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-274": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-275": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-276": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-277": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-278": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-279": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-280": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-281": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-282": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-283": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-284": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-285": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-286": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-287": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-288": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-289": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-290": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-291": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-292": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-293": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-294": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-295": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-296": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-297": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-298": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-299": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-300": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-301": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-302": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-303": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-304": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-305": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-306": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-307": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-308": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-309": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-310": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-311": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-312": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-313": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-314": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-315": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-316": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-317": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-318": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-319": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-320": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-321": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-322": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-323": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-324": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-325": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-326": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-327": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-328": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-329": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-330": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-331": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-332": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-333": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-334": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-335": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-336": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-337": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-338": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-339": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-340": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-341": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-342": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-343": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-344": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-345": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-346": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-347": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-348": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-349": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-350": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-351": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-352": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-353": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-354": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-355": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-356": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-357": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-358": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-359": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-360": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-361": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-362": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-363": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-364": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-365": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-366": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-367": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-368": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-369": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-370": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-371": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-372": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-373": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-374": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-375": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-376": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-377": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-378": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-379": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-380": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-381": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-382": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-383": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-384": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-385": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-386": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-387": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-388": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-389": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-390": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-391": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-392": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-393": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-394": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-395": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-396": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-397": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-398": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-399": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-400": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-401": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-402": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-403": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-404": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-405": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-406": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-407": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-408": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-409": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-410": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-411": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-412": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-413": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-414": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-415": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-416": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-417": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-418": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-419": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-420": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-421": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-422": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-423": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-424": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-425": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-426": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-427": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-428": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-429": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-430": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-431": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-432": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-433": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-434": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-435": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-436": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-437": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-438": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-439": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-440": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-441": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-442": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-443": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-444": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-445": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-446": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-447": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-448": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-449": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-450": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-451": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-452": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-453": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-454": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-455": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-456": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-457": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-458": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-459": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-460": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-461": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-462": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-463": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-464": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-465": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-466": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-467": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-468": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-469": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-470": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-471": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-472": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-473": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-474": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-475": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-476": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-477": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-478": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-479": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-480": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-481": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-482": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-483": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-484": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-485": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-486": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-487": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-488": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-489": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-490": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-491": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-492": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-493": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-494": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-495": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-496": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-497": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-498": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-499": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-500": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-501": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-502": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-503": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-504": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-505": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-506": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-507": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-508": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-509": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-510": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-511": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-512": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-513": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-514": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-515": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-516": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-517": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-518": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-519": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-520": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-521": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-522": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-523": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-524": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-525": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-526": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-527": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-528": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-529": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-530": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-531": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-532": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-533": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-534": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-535": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-536": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-537": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-538": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-539": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-540": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-541": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-542": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-543": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-544": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-545": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-546": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-547": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-548": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-549": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-550": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-551": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-552": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-553": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-554": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-555": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-556": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-557": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-558": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-559": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-560": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-561": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-562": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-563": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-564": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-565": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-566": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-567": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-568": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-569": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-570": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-571": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-572": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-573": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-574": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-575": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-576": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-577": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-578": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-579": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-580": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-581": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-582": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-583": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-584": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-585": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-586": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-587": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-588": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-589": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ],
+        "Sensor-590": [
+            "int",
+            "int64",
+            "float",
+            "float64"
+        ]
+    }
+}

@@ -36,9 +36,13 @@ def write_json_file(file_path:str, report:dict)->None:
     
 
 
-def create_regex():
+def create_regex(is_prediction=False):
     #wafer-fault-training-collection_...
+    #"wafer-fault-testing-collection_wafer_13012020_090817.csv"
     filename_pattern = r"^wafer-raw-training-collection_Wafer_(?P<DateStamp>\d{8})_(?P<TimeStamp>\d{6})\.csv$"
+    if is_prediction:
+        filename_pattern = r"^wafer-fault-testing-collection_Wafer_(?P<DateStamp>\d{8})_(?P<TimeStamp>\d{6})\.csv$"
+
     re_object = re.compile(filename_pattern,re.IGNORECASE)
     return re_object
 
@@ -82,7 +86,8 @@ def load_object(file_path:str)->object:
         return dill.load(f)
 
 
-def load_data(valid_data_dir:str)->pd.DataFrame:
+def load_data(valid_data_dir:str,is_prediction=False)->pd.DataFrame:
+    os.makedirs(valid_data_dir,exist_ok=True)
     csv_file_list = os.listdir(valid_data_dir)
     df_merged = pd.DataFrame()
     for file in csv_file_list:
@@ -90,7 +95,8 @@ def load_data(valid_data_dir:str)->pd.DataFrame:
         df = pd.read_csv(file_path)
         df_merged = pd.concat(objs=[df_merged,df],ignore_index=True) # merged around axis=0
         df_merged.drop(columns=["Wafer"],inplace=True)
-        filt = df_merged["Good/Bad"]==1
-        df_merged["Good/Bad"] = np.where(filt,1,0)
+        if not is_prediction:
+            filt = df_merged["Good/Bad"]==1
+            df_merged["Good/Bad"] = np.where(filt,1,0)
 
     return df_merged 

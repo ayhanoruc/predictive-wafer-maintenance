@@ -13,8 +13,10 @@ class DataIngestionArtifact:
 @dataclass
 class DataValidationArtifact:
 
-    valid_data_dir:str 
-    invalid_data_dir:str
+    valid_data_dir : str 
+    invalid_data_dir : str
+    valid_unseen_data_dir : str 
+    invalid_unseen_data_dir : str
 
 @dataclass 
 class DataTransformationArtifact:

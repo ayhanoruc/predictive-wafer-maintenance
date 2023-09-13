@@ -8,7 +8,7 @@ from src.log_handler import AppLogger
 from src.entity.config_entity import DataValidationConfig
 from src.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
 from src.utility.generic import read_json_file
-from src.constants.training_pipeline import TRAINING_SCHEMA_FILE_PATH
+from src.constants.training_pipeline import TRAINING_SCHEMA_FILE_PATH, PREDICTION_SCHEMA_FILE_PATH
 from src.utility.generic import create_regex, check_regex_match
 from src.data_access.mongo_db import MongoConnect
 from src.constants.training_pipeline import MONGO_VALID_COLLECTION_NAME, MONGO_INVALID_COLLECTION_NAME
@@ -24,12 +24,10 @@ class DataValidationComponent:
         self.sample_file_name = self.training_schema["SampleFileName"]
         self.date_length = self.training_schema["LengthOfDateStampInFile"]
         self.timestamp_length= self.training_schema["LengthOfTimeStampInFile"]
-        self.cols= self.training_schema["col_name"]
+        self.training_cols= self.training_schema["col_name"]
         self.missing_threshold= self.training_schema["MissingThreshold"]
-
-        #self.nu_of_cols= self.training_schema["NumberofColumns"]
-        #self.col_names = set(self.training_schema["col_name"].keys())
-        #self.col_dtypes = set(self.training_schema["col_name"].values())
+        self.prediction_schema = read_json_file(PREDICTION_SCHEMA_FILE_PATH)
+        self.prediction_cols = self.prediction_schema["col_name"]
 
 
 
@@ -42,11 +40,11 @@ class DataValidationComponent:
 
     
     @handle_exceptions
-    def validate_file_name(self,file_path)->bool:
+    def validate_file_name(self,file_path,is_prediction=False)->bool:
         
         file_name= os.path.basename(file_path)
         self.log_writer.handle_logging(f"Filename validation stage for {file_name}")
-        re_obj= create_regex()
+        re_obj= create_regex(is_prediction)
         return check_regex_match(re_obj,file_name) # returns boolean
     
     
@@ -69,16 +67,22 @@ class DataValidationComponent:
 
 
     @handle_exceptions
-    def validate_columns_2(self,file_path):
+    def validate_columns_2(self,file_path, is_prediction=False):
         df = pd.read_csv(file_path)
         self.log_writer.handle_logging(f"Column number and dtype validation stage for {os.path.basename(file_path)}")
         df_columns= set(df.columns)
-        expected_columns = set(self.cols.keys())
-        missing_cols = expected_columns - df_columns
+        if is_prediction:
+            expected = self.prediction_cols
+        else:
+            expected = self.training_cols
+
+        missing_cols = set(expected.keys()) - df_columns
+
         if missing_cols:
             print("missing cols: ",missing_cols)
             return False 
-        for col_name, expected_dtype in self.cols.items():
+        
+        for col_name, expected_dtype in expected.items():
             if str(df[col_name].dtype) not in expected_dtype:
                 print(col_name,df[col_name].dtype, expected_dtype,": are missing")
                 return False
@@ -120,47 +124,48 @@ class DataValidationComponent:
 
     
     @handle_exceptions
-    def check_all_conditions(self, file_path):
+    def check_all_conditions(self, file_path,is_prediction=False):
+        if is_prediction:
+            valid_data_path = self.data_validation_config.valid_unseen_data_dir
+            invalid_data_path = self.data_validation_config.invalid_unseen_data_dir
+            
+        else:
+            valid_data_path = self.data_validation_config.valid_training_data_dir
+            invalid_data_path = self.data_validation_config.invalid_training_data_dir
+
+        os.makedirs(valid_data_path,exist_ok=True)
+        os.makedirs(invalid_data_path,exist_ok=True)
+
+
         self.log_writer.handle_logging("Validation Check Stages is started...")
-        if self.validate_file_name(file_path):
+        if self.validate_file_name(file_path,is_prediction):
             self.log_writer.handle_logging(f"Filename Validated!")
-            if self.validate_columns_2(file_path):
+            if self.validate_columns_2(file_path,is_prediction):
                 self.log_writer.handle_logging(f"Columns Validated!")
                 if not self.check_missing_value_percentage(file_path):
                     self.log_writer.handle_logging(f"Missing Value Validation Passed!")
 
                     if not self.check_zero_std(file_path):
-                        print("check_zero")
-                        valid_data_path = self.data_validation_config.valid_training_data_dir
-                        os.makedirs(valid_data_path,exist_ok=True)
-                        print(os.path.basename(file_path))
+                        print("check_zero")                        
                         shutil.move(file_path,os.path.join(valid_data_path,os.path.basename(file_path))) # öncesinde copy yapıp sonra move da edilebilir.
                     
                     else:
-                        #print("invalid")
-                        invalid_data_path = self.data_validation_config.invalid_training_data_dir
-                        os.makedirs(invalid_data_path,exist_ok=True)
                         shutil.move(file_path,os.path.join(invalid_data_path,os.path.basename(file_path)))
 
                 else:
+
                     self.log_writer.handle_logging(f"Missing Value Percentage is above the permitted threshold!")
-                    invalid_data_path = self.data_validation_config.invalid_training_data_dir
-                    os.makedirs(invalid_data_path,exist_ok=True)
                     shutil.move(file_path,os.path.join(invalid_data_path,os.path.basename(file_path))) 
                     self.log_writer.handle_logging(f"File {os.path.basename(file_path)} is moved to invalid data directory")       
 
 
             else:
                 self.log_writer.handle_logging(f"Columns are not validated")
-                invalid_data_path = self.data_validation_config.invalid_training_data_dir
-                os.makedirs(invalid_data_path,exist_ok=True)
                 shutil.move(file_path,os.path.join(invalid_data_path,os.path.basename(file_path)))
                 self.log_writer.handle_logging(f"File {os.path.basename(file_path)} is moved to invalid data directory") 
 
         else:
             self.log_writer.handle_logging(f"Filename is not validated")
-            invalid_data_path = self.data_validation_config.invalid_training_data_dir
-            os.makedirs(invalid_data_path,exist_ok=True)
             shutil.move(file_path,os.path.join(invalid_data_path,os.path.basename(file_path)))
             self.log_writer.handle_logging(f"File {os.path.basename(file_path)} is moved to invalid data directory")
 
@@ -207,7 +212,7 @@ class DataValidationComponent:
 
         for csv_path in csv_path_list:
             file_path = os.path.join(feature_store_dir,csv_path)
-            self.check_all_conditions(file_path)
+            self.check_all_conditions(file_path,is_prediction=False)
         
         self.post_validation_insertion()
         self.post_validation_deletion()
@@ -215,7 +220,31 @@ class DataValidationComponent:
         
         data_validation_artifact = DataValidationArtifact(
             valid_data_dir= self.data_validation_config.valid_training_data_dir ,
-            invalid_data_dir= self.data_validation_config.invalid_training_data_dir
+            invalid_data_dir= self.data_validation_config.invalid_training_data_dir, 
+            valid_unseen_data_dir= self.data_validation_config.valid_unseen_data_dir,
+            invalid_unseen_data_dir= self.data_validation_config.invalid_unseen_data_dir
         )   
         return data_validation_artifact
+    
+
+    @handle_exceptions
+    def run_prediction_data_validation(self):
+        self.log_writer.handle_logging("-------------ENTERED DATA VALIDATION STAGE FOR PREDICTION DATASET------------")
+        prediction_files_dir = self.data_validation_config.prediction_data_dir
+        csv_path_list = os.listdir(prediction_files_dir)
+        for csv_name in csv_path_list:
+            print(csv_name)
+            file_path = os.path.join(prediction_files_dir,csv_name)
+            self.check_all_conditions(file_path,is_prediction=True)
+
+        data_validation_artifact = DataValidationArtifact(
+            valid_data_dir= self.data_validation_config.valid_training_data_dir ,
+            invalid_data_dir= self.data_validation_config.invalid_training_data_dir, 
+            valid_unseen_data_dir= self.data_validation_config.valid_unseen_data_dir,
+            invalid_unseen_data_dir= self.data_validation_config.invalid_unseen_data_dir
+        )  
+
+        return data_validation_artifact
+
+
     

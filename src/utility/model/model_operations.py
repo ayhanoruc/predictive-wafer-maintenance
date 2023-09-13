@@ -2,7 +2,8 @@ import os,sys
 from src.constants.training_pipeline import SAVED_MODEL_DIR, MODEL_FILE_NAME
 
 from src.utility.generic import save_object
-
+from config import PROJECT_ROOT
+import datetime
 
 class ReadyModel:
     
@@ -21,6 +22,7 @@ class ReadyModel:
     def predict(self,X,is_testing=True,threshold=0.26):
 
         X_transformed = self.preprocessor.transform(X, is_testing=is_testing)
+        print("succesfully transformed")
         y_pred_proba = self.model.predict_proba(X_transformed)
         y_test_pred = (y_pred_proba[:,1]>threshold).astype(int)
         
@@ -55,7 +57,20 @@ class ModelResolver:
         return os.path.join(self.saved_models_dir, f"{latest_timestamp}",MODEL_FILE_NAME) # saved_models/84449204/model.pkl
     
 
-    
+    def get_latest_best_model_artifact(self,)->str:
+
+        artifact_dir = os.path.join(PROJECT_ROOT,"artifact")
+        sub_dirs = [dir for dir in os.listdir(artifact_dir) if os.path.isdir(os.path.join(artifact_dir,dir))]
+
+        sub_dirs.sort(key= lambda x:datetime.datetime.strptime(x,"%d_%m_%Y_%H_%M"), reverse = True)
+        report_yaml_path = None 
+        for subdir in sub_dirs:
+            latest_dir = subdir
+            report_yaml_path = os.path.join(artifact_dir, latest_dir,"model_evaluation","report.yaml")
+            if os.path.exists(report_yaml_path):
+                break 
+            
+        return report_yaml_path
 
 
     def is_a_model_exists(self)->bool:

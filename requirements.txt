@@ -2,3 +2,7 @@ pymongo
 pandas 
 numpy
 scikit-learn
+xgboost
+flask
+flask-bootstrap
+flask-uploads

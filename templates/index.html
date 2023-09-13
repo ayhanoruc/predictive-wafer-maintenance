@@ -1,0 +1,54 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAFER MAINTENANCE INTERFACE</title>
+</head>
+
+{% extends "bootstrap/base.html" %}
+{% block content %}
+<body>
+    {% block new_content %}
+    <span class="border border-primary"></span>
+    {% endblock new_content %}
+    <div class="jumbotron bg-light text-center">
+        <h1 class="display-3 custom-title">WAFER MAINTENANCE INTERFACE</h1>
+        {% block additional_content %}
+        <div class="border border-primary">
+            <h3 class="custom-subtitle">Monitor your machinery components' health, detect faults, and decrease your costs!</h3>
+        </div>
+        {% endblock additional_content %}
+        <div class="col-3 offset-md-9">
+            <a href="{{url_for('index')}}" type="button" class="btn btn-primary">Refresh</a>
+        </div>
+    </div>
+  
+
+    <div class="container bg-light">
+        <div class="row justify-content-center"> <!-- Added justify-content-center class here -->
+            <!-- Left Container: NEW MODEL TRAINING -->
+            <div class="col-12 col-md-4 col-lg-6"> <!-- Removed mx-auto class -->
+
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">NEW MODEL TRAINING</h3>
+                        <p class="card-text">Train a new model for predictive maintenance.</p>
+                        <a href="/training" class="btn btn-primary">Train Model</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Container: DETECT FAULTY WAFERS -->
+            <div class="col-12 col-md-6 col-lg-6"> <!-- Removed mx-auto class -->
+
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">DETECT FAULTY WAFERS</h3>
+                        <p class="card-text">Detect faulty wafers using the trained model.</p>
+                        <a href="/prediction" class="btn btn-primary">Detect Faulty Wafers</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</body>
+{% endblock %}

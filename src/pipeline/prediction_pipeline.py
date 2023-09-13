@@ -1,20 +1,14 @@
 from src.entity.config_entity import TrainingPipelineConfig, DataValidationConfig, DataIngestionConfig, ModelPusherConfig
 
-from src.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact,DataTransformationArtifact,\
-                                       ModelTrainerArtifact,ModelEvaluationArtifact,ModelPusherArtifact
+from src.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
 
 
 from src.components.data_ingestion import DataIngestionComponent
 from src.components.data_validation import DataValidationComponent
-from src.components.data_transformation import DataTransformationComponent
-from src.components.model_trainer import ModelTrainerComponent
-from src.components.model_evaluator import ModelEvaluatorComponent
-from src.components.model_pusher import ModelPusherComponent
 
 from src.exception_handler import CustomException, handle_exceptions
 from src.log_handler import AppLogger
 
-from src.constants.training_pipeline import SAVED_MODEL_DIR
 
 from src.utility.model.model_operations import ModelResolver, ReadyModel
 from src.utility.generic import load_object, load_data, read_json_file

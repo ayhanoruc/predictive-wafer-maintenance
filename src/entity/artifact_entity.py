@@ -30,6 +30,13 @@ class ClassificationMetricsArtifact:
     roc_auc_score : float 
     cost_score : int 
 
+    def to_dict(self):
+        return {
+            "f1_score": self.f1_score,
+            "roc_auc_score": self.roc_auc_score,
+            "cost_score": int(self.cost_score)
+        }
+
 
 @dataclass
 class ModelTrainerArtifact:

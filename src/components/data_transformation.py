@@ -17,8 +17,8 @@ from src.entity.artifact_entity import DataValidationArtifact, DataTransformatio
 from src.utility.generic import save_numpy_array_data, save_object
 
 
-valid_train_dataset_dir = "../valid_feature_store/valid_training_data/" # test purpose
-valid_predict_dataset_dir = "../valid_feature_store/valid_predict_data/" # test purpose
+#valid_train_dataset_dir = "../valid_feature_store/valid_training_data/" # test purpose
+#valid_predict_dataset_dir = "../valid_feature_store/valid_predict_data/" # test purpose
 
 
 class TrainingPreprocessor(BaseEstimator,TransformerMixin):
@@ -65,10 +65,10 @@ class DataTransformationComponent:
     def __init__(self, data_transformation_config:DataTransformationConfig, data_validation_artifact: DataValidationArtifact):
         self.data_transformation_config  = data_transformation_config
         self.data_validation_artifact = data_validation_artifact
-        self.valid_train_dataset_dir = "./valid_feature_store/valid_training_data/" # test purpose
+        #self.valid_train_dataset_dir = "./valid_feature_store/valid_training_data/" # test purpose
         self.important_cols = None
         
-        #self.valid_train_dataset_dir = self.data_validation_artifact.valid_data_dir
+        self.valid_train_dataset_dir = self.data_validation_artifact.valid_data_dir # <- added
 
 
         self.log_writer = AppLogger("DataTransformation")

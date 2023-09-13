@@ -5,7 +5,7 @@ from sklearn.metrics import f1_score , roc_auc_score
 
 from src.exception_handler import CustomException, handle_exceptions
 from src.log_handler import AppLogger
-from src.utility.metrics.classification_metrics import cost_function
+from src.utility.metrics.classification_metrics import cost_function, get_classification_metrics
 from src.utility.generic import load_numpy_array_data, load_object, save_object
 from src.entity.config_entity import ModelTrainerConfig
 from src.entity.artifact_entity import ClassificationMetricsArtifact, ModelTrainerArtifact, DataTransformationArtifact
@@ -26,8 +26,9 @@ class ModelTrainerComponent:
             "scale_pos_weight":30,
             "reg_alpha": 0.1
         }
-        self.best_threshold = 0.2 # should be centeralized
-        self.model = XGBClassifier(**self.best_model_params)
+        self.best_threshold = 0.26 # should be centeralized
+        #self.model = XGBClassifier(**self.best_model_params)
+        self.model = XGBClassifier(scale_pos_weight=30, reg_alpha=0.1)
 
 
     def objective(self, trial):
@@ -51,9 +52,9 @@ class ModelTrainerComponent:
         y_pred = (y_pred_proba[:, 1] > threshold).astype(int)
 
         # Calculate the ROC AUC score
-        roc_auc = roc_auc_score(y_test, y_pred)
+        roc_auc = roc_auc_score(self.y_test, y_pred)
 
-        cost = cost_function(y_test,y_pred)
+        cost = cost_function(self.y_test,y_pred)
 
         # Return the cost as Optuna will try to minimze the objective
         return cost
@@ -103,10 +104,8 @@ class ModelTrainerComponent:
         y_test_pred = (y_pred_test_proba[:,1]>self.best_threshold).astype(int)
 
         
+        f1_score,roc_auc_score,test_cost=  get_classification_metrics(self.y_test,y_test_pred)
 
-        f1_score = f1_score(self.y_test, y_test_pred)
-        roc_auc_score = roc_auc_score(self.y_test, y_test_pred)
-        test_cost = cost_function(self.y_test,y_test_pred)
 
         self.log_writer.handle_logging("MODEL Trained/Tested Succesfully.")
         self.log_writer.handle_logging("TESTING : F1-score: {f1_score}, ROC AUC: {roc_auc_score}, Cost: {test_cost} ")
@@ -131,18 +130,26 @@ class ModelTrainerComponent:
             test_arr[:,:-1],
             test_arr[:,-1]
         )
+        print(self.X_train.shape, self.y_train.shape,"testdata:->" ,self.X_test.shape, self.y_test.shape)
         self.log_writer.handle_logging("Training & testing numpy arrays are loaded succesfully!")
         
 
         f1_score,roc_auc_score,test_cost = self.eval_model()
         
+        print(f"test_cost:{test_cost}")
 
-        if test_cost > self.model_trainer_config.expected_cost_score:
+        print(f"roc_auc_score:{roc_auc_score} vs expected_roc_auc_score:{self.model_trainer_config.expected_roc_auc_score}")
+        print(f"f1_score:{f1_score} vs expected_f1_score:{self.model_trainer_config.expected_f1_score}")
+
+        if f1_score < self.model_trainer_config.expected_f1_score:
+            self.log_writer.handle_logging(f"f1_score:{f1_score} vs expected_f1_score:{self.model_trainer_config.expected_f1_score}")
             self.log_writer.handle_logging("expected cost_score is not satisfied")
             raise Exception("expected cost_score is not satisfied, try to do more Experimentation")
 
 
+        
         if roc_auc_score < self.model_trainer_config.expected_roc_auc_score:
+            self.log_writer.handle_logging(f"roc_auc_score:{roc_auc_score} vs expected_roc_auc_score:{self.model_trainer_config.expected_roc_auc_score}")
             self.log_writer.handle_logging("expected roc_auc_score is not satisfied")
             raise Exception("expected roc_auc_score is not satisfied, try to do more Experimentation")
 

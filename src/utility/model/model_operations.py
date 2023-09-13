@@ -18,7 +18,7 @@ class ReadyModel:
         self.model = model 
 
     
-    def predict(self,X,is_testing=True,threshold=0.13):
+    def predict(self,X,is_testing=True,threshold=0.26):
 
         X_transformed = self.preprocessor.transform(X, is_testing=is_testing)
         y_pred_proba = self.model.predict_proba(X_transformed)
@@ -69,7 +69,7 @@ class ModelResolver:
         Otherwise, it returns True.
 
         """
-
+        #os.makedirs(os.path.join(self.saved_models_dir),exist_ok=True)
         if not os.path.join(self.saved_models_dir):
             return False
         

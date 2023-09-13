@@ -64,7 +64,7 @@ class TrainingPipeline:
                                      model_trainer_artifact: ModelTrainerArtifact)->ModelEvaluationArtifact:
         model_evaluation_config = ModelEvaluationConfig(self.training_pipeline_config)
         model_evaluator_component = ModelEvaluatorComponent(model_evaluation_config,data_validation_artifact,model_trainer_artifact)
-        model_evaluator_artifact = model_evaluator_component.run_model_evaluator()    
+        model_evaluator_artifact = model_evaluator_component.run_model_evaluator(threshold=0.26)
 
         return model_evaluator_artifact
     
@@ -82,6 +82,8 @@ class TrainingPipeline:
         TrainingPipeline.is_pipeline_running = True 
         data_ingestion_artifact:DataIngestionArtifact = self.start_data_ingestion()
         data_validation_artifact:DataValidationArtifact = self.start_data_validation(data_ingestion_artifact)
+        
+        # bu arada tekrardan file ingest etmem gerekebilir. Bu pipeline'ı gözden geçir.
         data_transformation_artifact:DataTransformationArtifact = self.start_data_transformation(data_validation_artifact)
         model_trainer_artifact:ModelTrainerArtifact = self.start_model_trainer(data_transformation_artifact)
         model_evaluator_artifact:ModelEvaluationArtifact = self.start_model_evaluation(data_validation_artifact,
@@ -94,4 +96,3 @@ class TrainingPipeline:
         
         TrainingPipeline.is_pipeline_running = False
         self.log_writer.handle_logging("TRAINING PIPELINE COMPLETED!")
-        

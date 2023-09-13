@@ -53,7 +53,9 @@ class ModelEvaluatorComponent:
         # aynı şekilde current modelimiz de bi önceki step olan modeltrainer'dan preprocessor_obj ve model_obj olarak model_trainer_artifact'te depolandı
         # bunu modeltrainer artifactten load ederiz, böylece her iki model de predicte hazır durumda olur
 
-        valid_train_data_dir = self.data_validation_artifact.valid_data_dir 
+        #valid_train_data_dir = r"C:\Users\ayhan\Desktop\predictive-wafer-maintenance\valid_feature_store\valid_training_data" # test purpose
+        
+        valid_train_data_dir = self.data_validation_artifact.valid_data_dir  # <- UPDATED
         test_df = load_data(valid_train_data_dir)
         X= test_df.iloc[:,:-1]
         y= test_df.iloc[:,-1]
@@ -67,10 +69,12 @@ class ModelEvaluatorComponent:
 
             model_evaluation_artifact = ModelEvaluationArtifact(
                 is_model_accepted = is_model_accepted,
+                improved_f1_score = 0.0,
                 improved_cost_score = 0.0,
                 improved_roc_auc_score= 0.0,
                 trained_model_file_path= trained_model_file_path,
                 trained_model_metrics_artifact=self.model_trainer_artifact.test_metric_artifact,
+                best_model_path=trained_model_file_path,
                 best_model_metrics_artifact= self.model_trainer_artifact.test_metric_artifact 
             ) 
             return model_evaluation_artifact
@@ -102,28 +106,35 @@ class ModelEvaluatorComponent:
         # COMPARISON
         # calculate and normalize the change in related metric scores
         roc_auc_score_diff = (current_roc_auc_score - best_model_roc_auc_score)/best_model_roc_auc_score  
-        f1_score_diff = (current_f1_score - best_model_f1_score)/best_model_f1_score
-        cost_score_diff = (current_test_cost - best_model_test_cost)/ best_model_test_cost # we need to minimize this
+        f1_score_diff = (current_f1_score - best_model_f1_score)/best_model_f1_score 
+        cost_score_diff = (current_test_cost - best_model_test_cost)/ best_model_test_cost 
+
+        if f1_score_diff >= 0.03: # needs to be stored in constants
+            is_model_accepted = True
+        else:
+            is_model_accepted = False
 
 
-        # in this project, be more concerned about total cost score
+        """
         if cost_score_diff < -0.01:
             is_model_accepted = True
         else:
-            is_model_accepted = False 
+            is_model_accepted = False """
 
         
         model_evaluation_artifact = ModelEvaluationArtifact(
             is_model_accepted=is_model_accepted,
             improved_f1_score = f1_score_diff,
             improved_roc_auc_score= roc_auc_score_diff,
+            improved_cost_score = cost_score_diff,
             best_model_path = best_model_path ,# this can change over time, so it is a good practice to update here
             trained_model_file_path = trained_model_file_path,
-            trained_model_metrics_artifact = current_model_metrics_artifact,
-            best_model_metrics_artifact = best_model_metrics_artifact
+            trained_model_metrics_artifact = current_model_metrics_artifact.to_dict(),
+            best_model_metrics_artifact = best_model_metrics_artifact.to_dict()
         )
         self.log_writer.handle_logging(f"Model evaluation artifact : {model_evaluation_artifact}")
 
+        os.makedirs(os.path.dirname(self.model_evaluation_config.report_file_path),exist_ok=True)
         model_eval_report = model_evaluation_artifact.__dict__
         write_json_file(self.model_evaluation_config.report_file_path,model_eval_report)
 

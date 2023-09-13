@@ -188,7 +188,12 @@ class DataValidationComponent:
         self.log_writer.handle_logging("DELETION SUCCESFULL!")
         
 
-        
+    @handle_exceptions
+    def post_validation_ingestion(self):
+        self.log_writer.handle_logging("INGESTING VALID FILES FROM MONGODB")
+        target_dir = self.data_validation_config.valid_training_data_dir
+        self.mongo_connect.ingest_with_fs(target_dir,self.data_validation_config.mongo_valid_collection_name)
+        self.log_writer.handle_logging("POST VALIDATION INGESTION SUCCESFULL!")
 
 
     @handle_exceptions
@@ -206,6 +211,7 @@ class DataValidationComponent:
         
         self.post_validation_insertion()
         self.post_validation_deletion()
+        self.post_validation_ingestion()
         
         data_validation_artifact = DataValidationArtifact(
             valid_data_dir= self.data_validation_config.valid_training_data_dir ,

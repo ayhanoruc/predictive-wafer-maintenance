@@ -66,8 +66,7 @@ class ModelTrainerConfig:
         self.model_trainer_trained_model_file_path = os.path.join(self.model_trainer_dir, training_pipeline.MODEL_TRAINER_TRAINED_MODEL_DIR, training_pipeline.MODEL_TRAINER_TRAINED_MODEL_NAME)
 
         self.expected_roc_auc_score = training_pipeline.MODEL_TRAINER_EXPECTED_ROC_AUC_SCORE
-        self.expected_cost_score = training_pipeline.MODEL_TRAINER_EXPECTED_COST_SCORE
-
+        self.expected_f1_score = training_pipeline.MODEL_TRAINER_EXPECTED_F1_SCORE
 
 class ModelEvaluationConfig:
 

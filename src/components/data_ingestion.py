@@ -15,8 +15,7 @@ from src.constants.training_pipeline import TRAINING_SCHEMA_FILE_PATH
 from src.data_access.mongo_db import MongoConnect
 from src.constants.mongo import MONGO_URL,DB_NAME,TRAINING_COLLECTION_NAME
 
-from src.utility.generic import write_to_csv, export_csv_to_df,merge_csv_files
-
+from src.utility.generic import write_to_csv, export_csv_to_df
 
 
 

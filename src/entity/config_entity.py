@@ -61,9 +61,9 @@ class DataTransformationConfig:
 
 
 class ModelTrainerConfig:
-    def __init__(self, trainin_pipeline_config:TrainingPipelineConfig):
+    def __init__(self, training_pipeline_config:TrainingPipelineConfig):
         
-        self.model_trainer_dir = os.path.join(trainin_pipeline_config.artifact_dir, training_pipeline.MODEL_TRAINER_DIR_NAME)
+        self.model_trainer_dir = os.path.join(training_pipeline_config.artifact_dir, training_pipeline.MODEL_TRAINER_DIR_NAME)
 
         self.model_trainer_trained_model_file_path = os.path.join(self.model_trainer_dir, training_pipeline.MODEL_TRAINER_TRAINED_MODEL_DIR, training_pipeline.MODEL_TRAINER_TRAINED_MODEL_NAME)
 
@@ -72,9 +72,9 @@ class ModelTrainerConfig:
 
 class ModelEvaluationConfig:
 
-    def __init__(self, trainin_pipeline_config:TrainingPipelineConfig):
+    def __init__(self, training_pipeline_config:TrainingPipelineConfig):
 
-        self.model_evaluation_dir =  os.path.join(trainin_pipeline_config.artifact_dir,training_pipeline.MODEL_EVALUATION_DIR)
+        self.model_evaluation_dir =  os.path.join(training_pipeline_config.artifact_dir,training_pipeline.MODEL_EVALUATION_DIR)
         self.report_file_path = os.path.join(self.model_evaluation_dir,training_pipeline.MODEL_EVALUATION_REPORT_NAME)
         self.model_shift_threshold = training_pipeline.MODEL_SHIFT_THRESHOLD
         

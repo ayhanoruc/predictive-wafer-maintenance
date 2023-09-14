@@ -26,7 +26,35 @@ class TrainingPipeline:
 
         self.log_writer = AppLogger("Traning Pipeline")
 
+
+    def start_component(self, config_class, component_class, run_method: str, *args,**kwargs) -> object:
+        config = config_class(training_pipeline_config=self.training_pipeline_config)   
+        component = component_class(config, *args, )
+        artifact = getattr(component, run_method)(**kwargs)
+        
+        return artifact
+
     def start_data_ingestion(self) -> DataIngestionArtifact:
+        return self.start_component(DataIngestionConfig, DataIngestionComponent, "run_data_ingestion")
+
+    def start_data_validation(self, data_ingestion_artifact: DataIngestionArtifact) -> DataValidationArtifact:
+        return self.start_component(DataValidationConfig, DataValidationComponent, "run_data_validation", data_ingestion_artifact)
+
+    def start_data_transformation(self, data_validation_artifact: DataValidationArtifact) -> DataTransformationArtifact:
+        return self.start_component(DataTransformationConfig, DataTransformationComponent, "run_data_transformation", data_validation_artifact)
+
+    def start_model_trainer(self, data_transformation_artifact: DataTransformationArtifact) -> ModelTrainerArtifact:
+        return self.start_component(ModelTrainerConfig, ModelTrainerComponent, "run_model_trainer", data_transformation_artifact)
+
+    def start_model_evaluation(self, data_validation_artifact: DataValidationArtifact, model_trainer_artifact: ModelTrainerArtifact) -> ModelEvaluationArtifact:
+        return self.start_component(ModelEvaluationConfig, ModelEvaluatorComponent, "run_model_evaluator", data_validation_artifact, model_trainer_artifact,threshold=0.13)
+    
+
+    def start_model_pusher(self, model_evaluator_artifact: ModelEvaluationArtifact) -> ModelPusherArtifact:
+        return self.start_component(ModelPusherConfig, ModelPusherComponent, "run_model_pusher", model_evaluator_artifact)
+
+
+    """def start_data_ingestion(self) -> DataIngestionArtifact:
         self.data_ingestion_config = DataIngestionConfig(training_pipeline_config=self.training_pipeline_config)
         #log
         data_ingestion_component = DataIngestionComponent(data_ingestion_config=self.data_ingestion_config)
@@ -74,7 +102,7 @@ class TrainingPipeline:
         model_pusher_component = ModelPusherComponent(model_pusher_config,model_evaluator_artifact)
         model_pusher_artifact = model_pusher_component.run_model_pusher()
         
-        return model_pusher_artifact
+        return model_pusher_artifact   """
     
 
     def run_training_pipeline(self):
@@ -96,3 +124,12 @@ class TrainingPipeline:
         
         TrainingPipeline.is_pipeline_running = False
         self.log_writer.handle_logging("TRAINING PIPELINE COMPLETED!")
+
+
+
+
+
+
+
+
+

@@ -39,7 +39,7 @@ class DataValidationConfig:
         self.mongo_valid_collection_name = training_pipeline.MONGO_VALID_COLLECTION_NAME
         self.mongo_invalid_collection_name = training_pipeline.MONGO_INVALID_COLLECTION_NAME
 
-        self.prediction_data_dir = os.path.join(PROJECT_ROOT,"prediction_dataset")
+        self.prediction_data_dir = os.path.join(PROJECT_ROOT,training_pipeline.PREDICTION_DATASET_DIR)
         
 
         

@@ -23,6 +23,7 @@ DATA_INGESTION_DIR = "data_ingestion"
 DATA_INGESTION_FEATURE_STORE_DIR = "feature_store"
 DATA_INGESTION_INGESTED_DIR = "ingested"  
 DATA_INGESTION_SPLIT_RATIO = 0.25
+DATA_INGESTION_UPLOADED_FEATURE_STORE = os.path.join(PROJECT_ROOT,'uploaded_feature_store')
 
 
 # constants related to DataValidation component 
@@ -33,6 +34,7 @@ DATA_VALIDATION_VALID_DIR = "valid"
 DATA_VALIDATION_INVALID_DIR = "invalid"
 MONGO_VALID_COLLECTION_NAME = "wafer-valid-training-collection"
 MONGO_INVALID_COLLECTION_NAME = "wafer-invalid-training_collection"
+PREDICTION_DATASET_DIR = "prediction_dataset_dir"
 
 # constants related to DataTransformation component
 

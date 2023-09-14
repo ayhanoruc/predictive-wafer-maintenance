@@ -15,7 +15,7 @@ from src.components.model_pusher import ModelPusherComponent
 from src.exception_handler import CustomException, handle_exceptions
 from src.log_handler import AppLogger
 
-from src.constants.training_pipeline import SAVED_MODEL_DIR
+from src.constants.training_pipeline import SAVED_MODEL_DIR , DATA_INGESTION_UPLOADED_FEATURE_STORE
 
 
 class TrainingPipeline:
@@ -105,10 +105,28 @@ class TrainingPipeline:
         return model_pusher_artifact   """
     
 
-    def run_training_pipeline(self):
-
+    def run_training_pipeline(self, is_manual_ingestion = False):
         TrainingPipeline.is_pipeline_running = True 
-        data_ingestion_artifact:DataIngestionArtifact = self.start_data_ingestion()
+
+        if  not is_manual_ingestion:
+            """
+            this uses default ingested feature store directory which is from mongo db
+            """
+            
+            data_ingestion_artifact:DataIngestionArtifact = self.start_data_ingestion()
+
+        else:
+            """
+            this uses manually uploaded feature store directory which is ../uploaded_feature_store
+            """
+            data_ingestion_artifact= DataIngestionArtifact(
+                feature_store= DATA_INGESTION_UPLOADED_FEATURE_STORE,
+                train_file_path = None,
+                test_file_path = None
+            )
+
+        # rest is common among the two ingestion options.
+
         data_validation_artifact:DataValidationArtifact = self.start_data_validation(data_ingestion_artifact)
         
         # bu arada tekrardan file ingest etmem gerekebilir. Bu pipeline'ı gözden geçir.
@@ -118,13 +136,15 @@ class TrainingPipeline:
                                                                                         model_trainer_artifact)
         if not model_evaluator_artifact.is_model_accepted:
             # CUSTOMIZE ET
-            raise Exception("Current Trained Model is not improved or couldn satisfied the min accuracy")
+            print("Current Trained Model is not improved or couldn satisfied the min accuracy")
+            return False 
 
         model_pusher_artifact:ModelPusherArtifact = self.start_model_pusher(model_evaluator_artifact)
         
         TrainingPipeline.is_pipeline_running = False
         self.log_writer.handle_logging("TRAINING PIPELINE COMPLETED!")
 
+        return model_evaluator_artifact.to_dict()
 
 
 

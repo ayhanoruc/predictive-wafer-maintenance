@@ -46,6 +46,13 @@ class ModelTrainerArtifact:
     train_metric_artifact : None
     test_metric_artifact  : ClassificationMetricsArtifact
 
+    def to_dict(self):
+        return {
+            "trained_model_file_path": self.trained_model_file_path,
+            "train_metric_artifact": self.train_metric_artifact,
+            "test_metric_artifact": self.test_metric_artifact.to_dict()
+        }
+
 
 
  
@@ -60,6 +67,19 @@ class ModelEvaluationArtifact:
     trained_model_file_path: str 
     trained_model_metrics_artifact: ClassificationMetricsArtifact
     best_model_metrics_artifact: ClassificationMetricsArtifact
+
+    def to_dict(self):
+        return {
+            "is_model_accepted": self.is_model_accepted,
+            #"improved_cost_score": self.improved_cost_score,
+            "improved_roc_auc_score": self.improved_roc_auc_score,
+            "improved_f1_score" : self.improved_f1_score,
+            "best_model_path" : self.best_model_path,
+            "trained_model_file_path" : self.trained_model_file_path,
+            "trained_model_metrics_artifact" : self.trained_model_metrics_artifact,
+            "best_model_metrics_artifact" : self.best_model_metrics_artifact
+
+        }
 
 
 

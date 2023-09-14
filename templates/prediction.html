@@ -1,37 +1,85 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 {% extends "bootstrap/base.html" %}
 {% block content %}
-<div class="container">
-    <h2 class="mt-4">Predict Faulty Wafers</h2>
-    <p>Upload your data files for prediction:</p>
-    <form method="POST" class="form-group" enctype="multipart/form-data" action="/prediction">
-        <input type="file" name="files[]" multiple>
-        <button type="submit" class="btn btn-success">Upload Files</button>
-        <input type="reset" value="Reset" class="btn btn-danger mb-2">
-    </form>
-    
-    {% if prediction_status is defined %}
-    <div class="row">
-        <div class="col-md-3"> <!-- Add col-md-6 class -->
-            {% if prediction_status == "Prediction successful!" %}
-            <div class="alert alert-success mt-3" role="alert" id="success-alert">
-                {{ prediction_status }}
-            </div>
-            {% elif prediction_status == "No files were uploaded." %}
-            <div class="alert alert-danger mt-3" role="alert" id="error-alert">
-                No files were uploaded
+<div class="row">
+
+    <div class="col-md-6">
+
+        <div class="container">
+            <h2 class="mt-4">Predict Faulty Wafers</h2>
+            <p>Upload your data files for prediction:</p>
+            <form method="POST" class="form-group" enctype="multipart/form-data" action="/prediction">
+                <input type="file" name="files[]" multiple>
+                <button type="submit" class="btn btn-success">Upload Files</button>
+                <button type="button" class="btn btn-primary" id="predict-button">Predict</button>
+                <input type="reset" value="Reset" id="reset-button" class="btn btn-danger mb-2">
+            </form>
+            
+            {% if upload_status is defined %}
+            <div class="row">
+                <div class="col-md-3"> <!-- Add col-md-6 class -->
+                    {% if upload_status == "Prediction files uploaded successfully!" %}
+                    <div class="alert alert-success mt-3" role="alert" id="success-alert">
+                        {{ upload_status }}
+                    </div>
+                    {% elif upload_status == "No files were uploaded." %}
+                    <div class="alert alert-danger mt-3" role="alert" id="error-alert">
+                        No files were uploaded
+                    </div>
+                    {% endif %}
+                </div>
             </div>
             {% endif %}
+
         </div>
     </div>
-    {% endif %}
+
+    <div class="col-md-6">
+        <h4 class="alert-heading">Model Predictions</h4>
+        <div class="alert alert-info" role="alert"  id="prediction-results-container" >
+            <p>...........................</p>
+            <div>RESULTS</div>
+            
+
+        </div>
+    </div>
     
 
+</div>
 <script>
     // Automatically hide success and error alerts after 5 seconds
     setTimeout(function() {
         document.getElementById('success-alert').style.display = 'none';
         document.getElementById('error-alert').style.display = 'none';
     }, 5000); // 5000 milliseconds (5 seconds)
+
+    // Function to clear the content of the prediction results container
+    function clearPredictionResults() {
+        var predictionResultsContainer = $('#prediction-results-container');
+        predictionResultsContainer.empty();
+    }
+
+    // Function to initiate prediction after clicking the "PREDICT" button
+    $('#predict-button').click(function() {
+        $.ajax({
+            type: 'POST',
+            url: '/get_predictions',  // Replace with the actual endpoint URL
+            success: function(data) {
+                // Update the content of the prediction results container
+                var predictionResultsContainer = $('#prediction-results-container');
+                predictionResultsContainer.empty();  // Clear existing content
+                predictionResultsContainer.append('<textarea rows="15" cols="65">' + data.prediction_result + '</textarea>');
+                
+            }
+        });
+    });
+
+    // Attach the clearPredictionResults function to the "Reset" button
+    $('#reset-button').click(function() {
+        clearPredictionResults();
+    });
 </script>
     
 

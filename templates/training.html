@@ -1,35 +1,97 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 {% extends "bootstrap/base.html" %}
 {% block content %}
-<div class="container">
-    <h2 class="mt-4">Train Model</h2>
-    <p>Upload your training data files:</p>
-    <form method="POST" class="form-group" enctype="multipart/form-data" action="/training">
-        <input type="file" name="files[]" multiple>
-        <button type="submit" class="btn btn-success">Upload Files</button>
-        <input type="reset" value="Reset" class="btn btn-danger mb-2">
-    </form>
-    
-    {% if upload_status is defined %}
-    <div class="row">
-        <div class="col-md-3"> <!-- Add col-md-6 class -->
-            {% if upload_status == "Files uploaded successfully!" %}
-            <div class="alert alert-success mt-3" role="alert" id="success-alert">
-                {{ upload_status }}
-            </div>
-            {% elif upload_status == "No files were uploaded." %}
-            <div class="alert alert-danger mt-3" role="alert" id="error-alert">
-                No files were uploaded
+<div class="row">
+
+    <div class="col-md-6">
+        <div class="container">
+            <h2 class="mt-4">Train Model</h2>
+            <p>Upload your training data files:</p>
+            <form method="POST" class="form-group" enctype="multipart/form-data" action="/training">
+                <input type="file" name="files[]" multiple>
+                <button type="submit" class="btn btn-success">Upload Files</button>
+                <input type="reset" value="Reset" class="btn btn-danger mb-2">
+            </form>
+            
+            {% if upload_status is defined %}
+            <div class="row">
+                <div class="col-md-3">
+                    {% if upload_status == "Files uploaded successfully!" %}
+                    <div class="alert alert-success mt-3" role="alert" id="success-alert">
+                        {{ upload_status }}
+                    </div>
+                    {% elif upload_status == "No files were uploaded." %}
+                    <div class="alert alert-danger mt-3" role="alert" id="error-alert">
+                        No files were uploaded
+                    </div>
+                    {% endif %}
+                </div>
             </div>
             {% endif %}
+            
+            <!-- Button to trigger manual training -->
+            <button type="button" class="btn btn-primary mt-3" id="train-new-model-button">TRAIN NEW MODEL</button>
         </div>
     </div>
-    {% endif %}
-    
+
+        
+    <div class="col-md-6">
+        <!-- Right-half container for model metrics -->
+        <div class="mt-4">
+            <!-- Information box 1: Current model metrics -->
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">Current Model Metrics</h4>
+                <p id="roc-auc-container">roc_auc_score = {{roc_auc_score}}</p>
+                <p id="f1-score-container">f1_score = {{f1_score}}</p>
+            </div>
+            <!-- Information box 2: Model evaluation metrics -->
+            <div class="alert alert-info mt-3" role="alert">
+                <h4 class="alert-heading">Model Evaluation Metrics</h4>
+                <p id="eval-metrics-container">eval_metrics: {{eval_metrics}}</p>
+                <!-- Add your model evaluation metrics here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript to trigger manual training -->
 <script>
     // Automatically hide success and error alerts after 5 seconds
     setTimeout(function() {
         document.getElementById('success-alert').style.display = 'none';
         document.getElementById('error-alert').style.display = 'none';
     }, 5000); // 5000 milliseconds (5 seconds)
+
+    // Function to initiate manual training after clicking the "TRAIN NEW MODEL" button
+    $('#train-new-model-button').click(function() {
+        $.ajax({
+            type: 'POST',
+            url: '/manual_training',
+            success: function(data) {
+                if (data.prediction_result !== false) {
+                    // Update the content of the model metrics containers
+                    var rocAucContainer = $('#roc-auc-container');
+                    var f1ScoreContainer = $('#f1-score-container');
+                    var evalMetricsContainer = $('#eval-metrics-container');
+                    rocAucContainer.empty();
+                    f1ScoreContainer.empty();
+                    evalMetricsContainer.empty();
+                    rocAucContainer.append('<p>roc_auc_score = ' + data.prediction_result.improved_roc_auc_score + '</p>');
+                    f1ScoreContainer.append('<p>f1_score = ' + data.prediction_result.improved_f1_score + '</p>');
+                    // Convert the dictionary to a string for display
+                    evalMetricsContainer.append('<pre>' + JSON.stringify(data.prediction_result.trained_model_metrics_artifact, null, 2) + '</pre>');
+                } else {
+                    // Display a popup message if model evaluation failed
+                    alert('Model evaluation failed. Please check your data or configuration.');
+                }
+            },
+            error: function() {
+                // Display a popup message for any error that occurs
+                alert('An error occurred during manual training.');
+            }
+        });
+    });
 </script>
 {% endblock %}

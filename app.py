@@ -111,33 +111,8 @@ def train_model():
 def manual_training():
     
     model_eval_dict = train_model()
-    """
-    here implement the logic for:
-    if model_eval_dict==False:
-        some popup message should come up
-    """
 
-    print("model trained succesfully")
-    """response ={
-
-        #'prediction_result': model_eval_dict
-
-        "is_model_accepted": True,
-        #"improved_cost_score": self.improved_cost_score,
-        "improved_roc_auc_score": 0.2,
-        "improved_f1_score" : 0.1,
-        "best_model_path" : "example/path",
-        "trained_model_file_path" : "example/path",
-        "trained_model_metrics_artifact" : {'artifact':'values'},
-        "best_model_metrics_artifact" : {'artifact':'values'}
-
-        
-        }"""
-    
-    response = {
-        'prediction_result': model_eval_dict
-    }
-  
+    response = {'prediction_result': model_eval_dict}
 
     return jsonify(response)
 
@@ -146,7 +121,6 @@ def manual_training():
 
 
 if __name__ == '__main__':
-    #print(get_prediction_results())
     app.run(debug=True)
     
 

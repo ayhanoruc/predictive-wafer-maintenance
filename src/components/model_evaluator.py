@@ -50,6 +50,7 @@ class ModelEvaluatorComponent:
     
     @handle_exceptions
     def run_model_evaluator(self,threshold)->ModelEvaluationArtifact:
+        self.log_writer.handle_logging("-------------ENTERED MODEL EVALUATOR STAGE------------")
         """
         Run the model evaluator component.
 
@@ -152,7 +153,7 @@ class ModelEvaluatorComponent:
             trained_model_metrics_artifact = current_model_metrics_artifact.to_dict(),
             best_model_metrics_artifact = best_model_metrics_artifact.to_dict()
         )
-        self.log_writer.handle_logging(f"Model evaluation artifact : {model_evaluation_artifact}")
+        self.log_writer.handle_logging(f"Model evaluation artifact generated succesfully : {model_evaluation_artifact}")
 
         os.makedirs(os.path.dirname(self.model_evaluation_config.report_file_path),exist_ok=True)
         model_eval_report = model_evaluation_artifact.__dict__

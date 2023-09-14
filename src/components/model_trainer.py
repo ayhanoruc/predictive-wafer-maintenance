@@ -1,9 +1,7 @@
-
 import optuna
 from xgboost import XGBClassifier
-from sklearn.metrics import f1_score , roc_auc_score 
 
-from src.exception_handler import CustomException, handle_exceptions
+from src.exception_handler import handle_exceptions
 from src.log_handler import AppLogger
 from src.utility.metrics.classification_metrics import cost_function, get_classification_metrics
 from src.utility.generic import load_numpy_array_data, load_object, save_object
@@ -11,10 +9,28 @@ from src.entity.config_entity import ModelTrainerConfig
 from src.entity.artifact_entity import ClassificationMetricsArtifact, ModelTrainerArtifact, DataTransformationArtifact
 from src.utility.model.model_operations import ReadyModel
 
-import os,sys 
+import os
+
 
 class ModelTrainerComponent:
+    """
+    Component for training and optimizing machine learning models using XGBoost.
 
+    This class is responsible for training and optimizing an XGBoost model, including hyperparameter tuning
+    using Optuna. It also evaluates the model's performance and saves the trained model for future use.
+
+    Args:
+        model_trainer_config (ModelTrainerConfig): Configuration for model training.
+        data_transformation_artifact (DataTransformationArtifact): Artifact from data transformation.
+
+    Attributes:
+        model_trainer_config (ModelTrainerConfig): Configuration for model training.
+        data_transformation_artifact (DataTransformationArtifact): Artifact from data transformation.
+        log_writer (AppLogger): Logger for recording component-specific logs.
+        best_model_params (dict): Default hyperparameters for the XGBoost model.
+        best_threshold (float): Default threshold value for binary classification.
+        model (XGBClassifier): XGBoost model instance.
+    """
     def __init__(self,model_trainer_config:ModelTrainerConfig, data_transformation_artifact:DataTransformationArtifact):
 
         self.model_trainer_config = model_trainer_config
@@ -30,8 +46,16 @@ class ModelTrainerComponent:
         #self.model = XGBClassifier(**self.best_model_params)
         self.model = XGBClassifier(scale_pos_weight=30, reg_alpha=0.1)
 
-
+    @handle_exceptions
     def objective(self, trial):
+        """
+        Optuna objective function for hyperparameter optimization.
+        Args:
+            trial: An Optuna trial object.
+        Returns:
+            cost (float): The cost to minimize during hyperparameter optimization.
+        """
+
         # Define the hyperparameters to optimize
         params = {
             "n_estimators": trial.suggest_int("n_estimators", 100, 600,step=50),
@@ -52,7 +76,7 @@ class ModelTrainerComponent:
         y_pred = (y_pred_proba[:, 1] > threshold).astype(int)
 
         # Calculate the ROC AUC score
-        roc_auc = roc_auc_score(self.y_test, y_pred)
+        #roc_auc = roc_auc_score(self.y_test, y_pred)
 
         cost = cost_function(self.y_test,y_pred)
 
@@ -67,8 +91,7 @@ class ModelTrainerComponent:
         self.log_writer.handle_logging("Hyperparams optimization initialized! Cost is being minimized!")
 
         study = optuna.create_study(direction="minimize")
-        study.optimize(self.objective, n_trials=5) # will take approximately 4-5 mins depending on your pc config.
-        #test etmek için n_trials'ı 5 yap
+        study.optimize(self.objective, n_trials=5) # >>> change n_trials to 100, its set to 5 for trial purpose
 
         # Get the best hyperparameters
         best_params = study.best_params
@@ -82,7 +105,16 @@ class ModelTrainerComponent:
 
     @handle_exceptions
     def train_model(self,X_train,y_train)->XGBClassifier():
+        """
+        Train the XGBoost model.
 
+        Args:
+            X_train (numpy.ndarray): The training feature data.
+            y_train (numpy.ndarray): The training target data.
+
+        Returns:
+            model (XGBClassifier): The trained XGBoost model.
+        """
         self.model.fit(X_train,y_train)
         self.log_writer.handle_logging("The model fitted to training data succesfully.")
         return self.model 
@@ -95,6 +127,9 @@ class ModelTrainerComponent:
         by model object using best_model params and threshold value if exists
         Afterwards, if retraining needed, we should re-assess params and threshold values, for other, satisfactory cases
         we dont need hyperparams tuning
+
+        Returns:
+            tuple: A tuple containing F1-score, ROC AUC score, and cost score.
         """
 
         model_obj = self.train_model(self.X_train,self.y_train)
@@ -112,8 +147,22 @@ class ModelTrainerComponent:
     
         return (f1_score,roc_auc_score,test_cost)
 
-    
+
     def run_model_trainer(self,)-> ModelTrainerArtifact:
+        self.log_writer.handle_logging("-------------ENTERED MODEL TRAINER STAGE------------")
+        """
+        Execute the model training and evaluation process.
+
+        This method performs the following steps:
+        1. Load and prepare training and testing datasets.
+        2. Evaluate the model's performance on the test dataset.
+        3. Compare the evaluated metrics with expected values and raise exceptions if criteria are not met.
+        4. If the model is satisfactory, save it for future use and create a Model Trainer Artifact.
+
+        Returns:
+            ModelTrainerArtifact: An artifact containing the trained model and evaluation metrics.
+        """
+
         self.log_writer.handle_logging("-------------ENTERED MODEL TRAINER STAGE------------")
         
         self.log_writer.handle_logging("Reading Training & testing datasets ")
@@ -130,7 +179,7 @@ class ModelTrainerComponent:
             test_arr[:,:-1],
             test_arr[:,-1]
         )
-        print(self.X_train.shape, self.y_train.shape,"testdata:->" ,self.X_test.shape, self.y_test.shape)
+        #print(self.X_train.shape, self.y_train.shape,"testdata:->" ,self.X_test.shape, self.y_test.shape)
         self.log_writer.handle_logging("Training & testing numpy arrays are loaded succesfully!")
         
 

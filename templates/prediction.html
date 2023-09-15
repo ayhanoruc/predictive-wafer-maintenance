@@ -19,7 +19,7 @@
             
             {% if upload_status is defined %}
             <div class="row">
-                <div class="col-md-3"> <!-- Add col-md-6 class -->
+                <div class="col-md-3"> 
                     {% if upload_status == "Prediction files uploaded successfully!" %}
                     <div class="alert alert-success mt-3" role="alert" id="success-alert">
                         {{ upload_status }}
@@ -53,7 +53,7 @@
     setTimeout(function() {
         document.getElementById('success-alert').style.display = 'none';
         document.getElementById('error-alert').style.display = 'none';
-    }, 5000); // 5000 milliseconds (5 seconds)
+    }, 5000); 
 
     // Function to clear the content of the prediction results container
     function clearPredictionResults() {
@@ -65,7 +65,7 @@
     $('#predict-button').click(function() {
         $.ajax({
             type: 'POST',
-            url: '/get_predictions',  // Replace with the actual endpoint URL
+            url: '/get_predictions',
             success: function(data) {
                 // Update the content of the prediction results container
                 var predictionResultsContainer = $('#prediction-results-container');

@@ -31,7 +31,7 @@
             </div>
             {% endif %}
             
-            <!-- Button to trigger manual training -->
+            
             <button type="button" class="btn btn-primary mt-3" id="train-new-model-button">TRAIN NEW MODEL</button>
         </div>
     </div>
@@ -50,13 +50,13 @@
             <div class="alert alert-info mt-3" role="alert">
                 <h4 class="alert-heading">Model Evaluation Metrics</h4>
                 <p id="eval-metrics-container">eval_metrics: {{eval_metrics}}</p>
-                <!-- Add your model evaluation metrics here -->
+                
             </div>
         </div>
     </div>
 </div>
 
-<!-- JavaScript to trigger manual training -->
+
 <script>
     // Automatically hide success and error alerts after 5 seconds
     setTimeout(function() {
@@ -82,9 +82,10 @@
                     f1ScoreContainer.append('<p>f1_score = ' + data.prediction_result.improved_f1_score + '</p>');
                     // Convert the dictionary to a string for display
                     evalMetricsContainer.append('<pre>' + JSON.stringify(data.prediction_result.trained_model_metrics_artifact, null, 2) + '</pre>');
+                    alert('Model evaluation completed! Current Trained Model is set to be best model!');
                 } else {
-                    // Display a popup message if model evaluation failed
-                    alert('Model evaluation failed. Please check your data or configuration.');
+                    // Display a popup message
+                    alert('Model evaluation completed! Current Trained Model is neither improved nor met the min accuracy');
                 }
             },
             error: function() {

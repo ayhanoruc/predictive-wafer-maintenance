@@ -2,13 +2,10 @@
 dist
 build
 *.egg*
-*pycache*
-*dataset
+*cache*
 results.txt
 *logs*
-test.py
 *ingested_data*
 *artifact*
-*.csv*
 *info*
 *uploads*

@@ -1,8 +1,12 @@
-pymongo
-pandas 
-numpy
-scikit-learn
-xgboost
-flask
-flask-bootstrap
-flask-uploads
+dill==0.3.7
+Flask==2.2.5
+Flask_Bootstrap==3.3.7.1
+imbalanced_learn==0.11.0
+numpy==1.23.5
+optuna==3.3.0
+pandas==2.0.3
+pymongo==4.5.0
+scikit_learn==1.3.0
+setuptools==68.0.0
+xgboost==1.7.6
+-e .

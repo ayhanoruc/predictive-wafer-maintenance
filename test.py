@@ -1,26 +1,36 @@
-#from src.constants.mongo import MONGO_URL, DB_NAME, TRAINING_COLLECTION_NAME,TESTING_COLLECTION_NAME,TRAINING_RAW_DATASET_DIR,TESTING_RAW_DATASET_DIR , INGESTED_TRAINING_RAW_DATASET_DIR, INGESTED_TESTING_RAW_DATASET_DIR
+# from src.constants.mongo import MONGO_URL, DB_NAME, TRAINING_COLLECTION_NAME,TESTING_COLLECTION_NAME,TRAINING_RAW_DATASET_DIR,TESTING_RAW_DATASET_DIR , INGESTED_TRAINING_RAW_DATASET_DIR, INGESTED_TESTING_RAW_DATASET_DIR
 import json
-import pandas as pd 
-import numpy as np 
+import pandas as pd
+import numpy as np
 from src.data_access.mongo_db import MongoConnect
-import os 
+import os
 from src.components.data_ingestion import DataIngestionComponent
-from src.entity.config_entity import TrainingPipelineConfig, DataIngestionConfig, DataValidationConfig, DataTransformationConfig
-from src.constants.training_pipeline import TRAINING_SCHEMA_FILE_PATH, DATA_INGESTION_INGESTED_DIR,DATA_INGESTION_DIR,\
-                                            DATA_INGESTION_FEATURE_STORE_DIR, MONGO_VALID_COLLECTION_NAME
+from src.entity.config_entity import (
+    TrainingPipelineConfig,
+    DataIngestionConfig,
+    DataValidationConfig,
+    DataTransformationConfig,
+)
+from src.constants.training_pipeline import (
+    TRAINING_SCHEMA_FILE_PATH,
+    DATA_INGESTION_INGESTED_DIR,
+    DATA_INGESTION_DIR,
+    DATA_INGESTION_FEATURE_STORE_DIR,
+    MONGO_VALID_COLLECTION_NAME,
+)
 
 from src.utility.generic import create_regex, read_json_file
 from src.components.data_validation import DataValidationComponent
 from src.components.data_transformation import DataTransformationComponent
 from config import PROJECT_ROOT
-from src.constants.mongo import TRAINING_RAW_DATASET_DIR,TESTING_RAW_DATASET_DIR
-from src.constants.mongo import MONGO_URL,DB_NAME
+from src.constants.mongo import TRAINING_RAW_DATASET_DIR, TESTING_RAW_DATASET_DIR
+from src.constants.mongo import MONGO_URL, DB_NAME
 
-from src.pipeline.training_pipeline import TrainingPipeline 
+from src.pipeline.training_pipeline import TrainingPipeline
 from src.pipeline.prediction_pipeline import PredictionPipeline
 
-#---------------------------------------------
-#---------------------------------------------
+# ---------------------------------------------
+# ---------------------------------------------
 
 """training_pipeline_config = TrainingPipelineConfig()
 
@@ -55,8 +65,8 @@ mongo_connect.ingest_with_fs(training_target_dir,MONGO_VALID_COLLECTION_NAME)
 mongo_connect.client.close()"""
 
 
-#---------------------------------------------
-#---------------------------------------------
+# ---------------------------------------------
+# ---------------------------------------------
 
 
 """validation_schema = {
@@ -81,9 +91,9 @@ with open(TRAINING_SCHEMA_FILE_PATH,"w") as schema_file:
     json.dump(validation_schema,schema_file,indent=4)"""
 
 
-#---------------------------------------------
+# ---------------------------------------------
 
-#---------------------------------------------
+# ---------------------------------------------
 
 
 """ regex_object = create_regex()
@@ -99,16 +109,16 @@ if match:
 else:
     print("Filename does not match the pattern.") """
 
-#---------------------------------------------
-#---------------------------------------------
+# ---------------------------------------------
+# ---------------------------------------------
 
 """ training_schema= read_json_file(TRAINING_SCHEMA_FILE_PATH)
 col_names = list(training_schema["col_name"].keys())
 
 print(col_names) """
 
-#---------------------------------------------
-#---------------------------------------------
+# ---------------------------------------------
+# ---------------------------------------------
 """training_pipeline_config = TrainingPipelineConfig()
 
 data_ingestion_config = DataIngestionConfig(training_pipeline_config)
@@ -118,8 +128,8 @@ data_validation_config = DataValidationConfig(training_pipeline_config)
 data_validation_component = DataValidationComponent(data_validation_config,ingestion_artifact)
 data_validation_component.run_data_validation()"""
 
-#---------------------------------------------
-#---------------------------------------------
+# ---------------------------------------------
+# ---------------------------------------------
 
 """ feature_store= os.path.join(PROJECT_ROOT,"artifact","28_08_2023_17_33","data_ingestion","feature_store")
 
@@ -133,8 +143,8 @@ for file_path in os.listdir(feature_store):
     df.to_csv(os.path.join(file_path),index=False) """
 
 
-#---------------------------------------------
-#---------------------------------------------
+# ---------------------------------------------
+# ---------------------------------------------
 """ 
 file_list = os.listdir(feature_store)
 
@@ -165,11 +175,11 @@ data_validation_artifact = data_validation_component.run_data_validation()
 data_transformation_config = DataTransformationConfig(training_pipeline_config)
 data_transformation_component = DataTransformationComponent(data_transformation_config,data_validation_artifact)
 data_transformation_artifact = data_transformation_component.run_data_transformation()"""
-#---------------------------------------------
-#---------------------------------------------
+# ---------------------------------------------
+# ---------------------------------------------
 
-#trainin_pipeline = TrainingPipeline()
-#trainin_pipeline.run_training_pipeline()
+# trainin_pipeline = TrainingPipeline()
+# trainin_pipeline.run_training_pipeline()
 
 """prediction_pipeline = PredictionPipeline()
 y_pred , best_model_artifact = prediction_pipeline.start_prediction_pipeline()
@@ -181,11 +191,13 @@ print(best_model_artifact)"""
 from pathlib import Path
 import fnmatch
 
+
 def is_excluded(path, dockerignore_patterns):
     for pattern in dockerignore_patterns:
         if fnmatch.fnmatch(path, pattern):
             return True
     return False
+
 
 def list_files_and_directories(root_dir, dockerignore_path):
     root_path = Path(root_dir)
@@ -195,7 +207,7 @@ def list_files_and_directories(root_dir, dockerignore_path):
     with open(dockerignore_path) as f:
         dockerignore_patterns = [line.strip() for line in f]
 
-    for item in root_path.glob('**/*'):
+    for item in root_path.glob("**/*"):
         item_path = str(item.relative_to(root_path))
         if item.is_file() and not is_excluded(item_path, dockerignore_patterns):
             all_files.append(item)
@@ -203,6 +215,7 @@ def list_files_and_directories(root_dir, dockerignore_path):
             all_dirs.append(item)
 
     return all_files, all_dirs
+
 
 # Specify the root directory of your project and the path to your .dockerignore file
 root_directory = r"C:\Users\ayhan\Desktop\predictive-wafer-maintenance"
@@ -219,4 +232,3 @@ for file in files:
 print("\nDirectories:")
 for dir in dirs:
     print(dir)
-

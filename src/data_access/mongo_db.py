@@ -1,9 +1,8 @@
-from pymongo import  MongoClient 
+from pymongo import MongoClient
 from gridfs import GridFS
-import os 
+import os
 from src.exception_handler import handle_exceptions
 from src.log_handler import AppLogger
-
 
 
 class MongoConnect:
@@ -14,15 +13,13 @@ class MongoConnect:
         log_writer (AppLogger): An instance of the AppLogger class for logging.
     """
 
-
-    def __init__(self,):
+    def __init__(
+        self,
+    ):
         self.log_writer = AppLogger("MongodbConnection")
-        
 
-
-        
     @handle_exceptions
-    def mongo_connection(self,mongo_url:str,db_name:str)->None:
+    def mongo_connection(self, mongo_url: str, db_name: str) -> None:
         """
         Establish a connection to a MongoDB database.
 
@@ -36,15 +33,16 @@ class MongoConnect:
             gridfs (GridFS): The GridFS instance for the database.
         """
 
-        self.client = MongoClient(mongo_url)        
+        self.client = MongoClient(mongo_url)
         self.database = self.client[db_name]
         self.gridfs = GridFS(self.database)
-        self.log_writer.handle_logging(f"MONGO CONNECTION: connected to {mongo_url},{db_name} succesfully!")
-            
+        self.log_writer.handle_logging(
+            f"MONGO CONNECTION: connected to {mongo_url},{db_name} succesfully!"
+        )
 
-    # USE FS 
+    # USE FS
     @handle_exceptions
-    def insert_with_fs(self,csv_path_list, collection_name):
+    def insert_with_fs(self, csv_path_list, collection_name):
         """
         Insert CSV files into MongoDB using GridFS.
 
@@ -54,20 +52,20 @@ class MongoConnect:
 
         Inserts CSV files into MongoDB using GridFS, associating them with a collection name.
         """
-        metadata = {"collection_name": collection_name} #Metadata containing the collection name is associated with each file.
+        metadata = {
+            "collection_name": collection_name
+        }  # Metadata containing the collection name is associated with each file.
         for file_path in csv_path_list:
-            
-            with open(file_path,'rb') as f:
-                
+            with open(file_path, "rb") as f:
                 file_name = f"{collection_name}_{os.path.basename(file_path)}"
-                fs_id = self.gridfs.put(f, filename= file_name,metadata = metadata )
-                self.log_writer.handle_logging("inserted file: {} with ID:{}".format(file_path,fs_id))
-                print("inserted file: {} with ID:{}".format(file_path,fs_id))
+                fs_id = self.gridfs.put(f, filename=file_name, metadata=metadata)
+                self.log_writer.handle_logging(
+                    "inserted file: {} with ID:{}".format(file_path, fs_id)
+                )
+                print("inserted file: {} with ID:{}".format(file_path, fs_id))
 
-
-                
-    @handle_exceptions 
-    def ingest_with_fs(self,target_dir,collection_name):
+    @handle_exceptions
+    def ingest_with_fs(self, target_dir, collection_name):
         """
         Ingest files from MongoDB GridFS into a target directory.
 
@@ -75,18 +73,19 @@ class MongoConnect:
             target_dir (str): The directory to which the ingested files will be saved.
             collection_name (str): The name of the MongoDB collection from which to ingest files.
         """
-        ingested_data_dir = os.path.join(target_dir) #review this line
-        os.makedirs(ingested_data_dir,exist_ok=True)
+        ingested_data_dir = os.path.join(target_dir)  # review this line
+        os.makedirs(ingested_data_dir, exist_ok=True)
         for file in self.gridfs.find({"metadata.collection_name": collection_name}):
-            file_data= file.read()
+            file_data = file.read()
             file_name = os.path.basename(file.filename)
-            file_path = os.path.join(ingested_data_dir,file_name)
+            file_path = os.path.join(ingested_data_dir, file_name)
 
-            with open(file_path,"wb") as f:
+            with open(file_path, "wb") as f:
                 f.write(file_data)
-                self.log_writer.handle_logging(f"Saved file {file_name} from {collection_name} to {ingested_data_dir}")
-
+                self.log_writer.handle_logging(
+                    f"Saved file {file_name} from {collection_name} to {ingested_data_dir}"
+                )
 
 
 if __name__ == "__main__":
-    pass 
+    pass

@@ -1,79 +1,85 @@
-import os,sys 
+import os, sys
 from src.constants.training_pipeline import SAVED_MODEL_DIR, MODEL_FILE_NAME
 
 from src.utility.generic import save_object
 from config import PROJECT_ROOT
 import datetime
 
+
 class ReadyModel:
-    
+
     """
     a trained machine learning model that includes
     both a preprocessor and a model for making predictions.
     """
 
-    def __init__(self,preprocessor, model):
-
-                
+    def __init__(self, preprocessor, model):
         self.preprocessor = preprocessor
-        self.model = model 
+        self.model = model
 
-    
-    def predict(self,X,is_testing=True,threshold=0.26):
-
+    def predict(self, X, is_testing=True, threshold=0.26):
         X_transformed = self.preprocessor.transform(X, is_testing=is_testing)
         print("succesfully transformed")
         y_pred_proba = self.model.predict_proba(X_transformed)
-        y_test_pred = (y_pred_proba[:,1]>threshold).astype(int)
-        
+        y_test_pred = (y_pred_proba[:, 1] > threshold).astype(int)
+
         return y_test_pred
-    
-
-
 
 
 class ModelResolver:
     def __init__(self, saved_models_dir=SAVED_MODEL_DIR):
-        
         self.saved_models_dir = saved_models_dir
 
-
-    
-    def get_best_model_path(self,)->str :
+    def get_best_model_path(
+        self,
+    ) -> str:
         """
         This method returns the path to the best (latest) model file.
         It first lists all directories (timestamps) within the saved_models_dir.
         It converts these timestamps (directory names) to integers.
-        It finds the latest timestamp (which represents the best model) by taking 
+        It finds the latest timestamp (which represents the best model) by taking
         the maximum value from the list of integers.
-        It then constructs and returns the path to the best model file by combining the 
+        It then constructs and returns the path to the best model file by combining the
         saved_models_dir, the latest timestamp directory, and a constant MODEL_FILE_NAME.
         """
-        
-        all_parent_dir_names = os.listdir(self.saved_models_dir) # which are just timestamp strings
-        timestamps = list(map(int,all_parent_dir_names)) # map them to integer format and put them into a list
-        latest_timestamp = max(timestamps) # which will be our best model <- THE LOGIC
-        
-        return os.path.join(self.saved_models_dir, f"{latest_timestamp}",MODEL_FILE_NAME) # saved_models/84449204/model.pkl
-    
 
-    def get_latest_best_model_artifact(self,)->str:
+        all_parent_dir_names = os.listdir(
+            self.saved_models_dir
+        )  # which are just timestamp strings
+        timestamps = list(
+            map(int, all_parent_dir_names)
+        )  # map them to integer format and put them into a list
+        latest_timestamp = max(timestamps)  # which will be our best model <- THE LOGIC
 
-        artifact_dir = os.path.join(PROJECT_ROOT,"artifact")
-        sub_dirs = [dir for dir in os.listdir(artifact_dir) if os.path.isdir(os.path.join(artifact_dir,dir))]
+        return os.path.join(
+            self.saved_models_dir, f"{latest_timestamp}", MODEL_FILE_NAME
+        )  # saved_models/84449204/model.pkl
 
-        sub_dirs.sort(key= lambda x:datetime.datetime.strptime(x,"%d_%m_%Y_%H_%M"), reverse = True)
-        report_yaml_path = None 
+    def get_latest_best_model_artifact(
+        self,
+    ) -> str:
+        artifact_dir = os.path.join(PROJECT_ROOT, "artifact")
+        sub_dirs = [
+            dir
+            for dir in os.listdir(artifact_dir)
+            if os.path.isdir(os.path.join(artifact_dir, dir))
+        ]
+
+        sub_dirs.sort(
+            key=lambda x: datetime.datetime.strptime(x, "%d_%m_%Y_%H_%M"), reverse=True
+        )
+        report_yaml_path = None
         for subdir in sub_dirs:
             latest_dir = subdir
-            report_yaml_path = os.path.join(artifact_dir, latest_dir,"model_evaluation","report.yaml")
+            report_yaml_path = os.path.join(
+                artifact_dir, latest_dir, "model_evaluation", "report.yaml"
+            )
             if os.path.exists(report_yaml_path):
-                break 
-            
+                break
+
         return report_yaml_path
 
-
-    def is_a_model_exists(self)->bool:
+    def is_a_model_exists(self) -> bool:
         """
         This method checks if a model exists in the specified directory.
         It first checks if the saved_models_dir itself exists. If not, it returns False.
@@ -84,20 +90,16 @@ class ModelResolver:
         Otherwise, it returns True.
 
         """
-        #os.makedirs(os.path.join(self.saved_models_dir),exist_ok=True)
+        # os.makedirs(os.path.join(self.saved_models_dir),exist_ok=True)
         if not os.path.join(self.saved_models_dir):
             return False
-        
+
         if len(os.listdir(self.saved_models_dir)) == 0:
-            return False 
-        
-        best_model_path = self.get_best_model_path() # refers to "any file"
+            return False
+
+        best_model_path = self.get_best_model_path()  # refers to "any file"
 
         if not os.path.exists(best_model_path):
-            return False 
-        
+            return False
 
-        return True # otherwise
-
-
-
+        return True  # otherwise

@@ -33,7 +33,7 @@ def index():
 
 @handle_exceptions
 @app.route("/training", methods=["GET", "POST"])
-def training():
+def training_file_upload():
     """
     This function handles both GET and POST requests. For GET requests, it renders the 'training.html' template.
     For POST requests, it processes uploaded files, saves them, and provides an upload status.
@@ -69,7 +69,7 @@ def training():
 
 @handle_exceptions
 @app.route("/prediction", methods=["GET", "POST"])
-def prediction():
+def prediction_file_upload():
     """
     This function handles both GET and POST requests. For GET requests, it renders the 'prediction.html' template.
     For POST requests, it processes uploaded files, saves them, and provides an upload status.
@@ -169,8 +169,8 @@ def manual_training():
 
     return jsonify(response)
 
-
-if __name__ == "__main__":
-    app.run(debug=True)
-    print("APP IS RUNNING")
+# WE DONT NEED IF __name__ == "__main__" in production.
+"""if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
+    print("APP IS RUNNING")"""
     

@@ -96,3 +96,9 @@ If you'd like to contribute to this project, please follow these guidelines:
     * Make your changes and commit them.
 
     * Submit a pull request with a clear description of your changes.
+
+### run docker build
+- first start Docker engine
+- `docker build -t predictive_maintenance_flask_app .`
+- since the app depends on mongoDB, go start mongodb compass in local(no need if connecting to mongo remote.)
+- `docker run -d -p 5000:5000 predictive_maintenance_flask_app `

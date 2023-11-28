@@ -1,10 +1,25 @@
-*artifact*
-saved_models
-*env*
-*.git*
-test.py
-*log*
-*egg*
-*build*
-*dist*
-*cache*
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches and logs
+.cache/
+.logs/
+
+.github/
+build/
+dataset/
+dist/
+notebook/
+prediction_dataset_dir/
+predictiveWaferMaintenance.egg-info/
+test-prediction/
+test-training/
+venv/
+
+.dockerignore
+.gitignore
+temporary_testing_functionality.py
+
+

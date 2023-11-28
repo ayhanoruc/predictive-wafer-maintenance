@@ -23,3 +23,5 @@ jobs:
 
     - name: Run test
       run: pytest tests/ # add this tests file
+    
+    # its also best practice to add a formatter  
